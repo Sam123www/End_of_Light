@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
@@ -9,10 +10,11 @@ public class playerController : MonoBehaviour
     [Header("Movement")]
     public float Speed;
     [Header("Jump")]
-    bool isJump;
+    bool jumpPressing, isJump, jumpHold;
     int jumpTimes;
+    float jumpTime;
     public int jumpMaxTimes;
-    public float jumpForce;
+    public float jumpForce, jumpForceHold;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,18 +44,32 @@ public class playerController : MonoBehaviour
     }
     void Jump()
     {
+        jumpHold = Input.GetButton("Jump");
         if (Input.GetButtonDown("Jump") && jumpTimes > 0)
         {
             jumpTimes--;
-            isJump = true;
+            jumpPressing = true;
         }
     }
     void JumpUp()
     {
-        if(isJump)
+        if(jumpPressing)
         {
+            isJump = true;
+            jumpTime = Time.time + 0.1f;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            isJump = false;
+            jumpPressing = false;
+        }
+        else if (isJump)
+        {
+            if (jumpHold)
+            {
+                rb.AddForce(new Vector2(0, jumpForceHold), ForceMode2D.Impulse);
+            }
+            if (jumpTime < Time.time || Input.GetButtonUp("Jump"))
+            {
+                isJump = false;
+            }
         }
     }
 }
