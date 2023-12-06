@@ -7,6 +7,10 @@ public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator anim;
+    [Header("collision")]
+    bool onGround;
+    float rayDis;
+    LayerMask groundMask;
     [Header("Movement")]
     public float Speed;
     [Header("Jump")]
@@ -30,13 +34,6 @@ public class playerController : MonoBehaviour
         JumpUp();
         Movement();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ground"))
-        {
-            jumpTimes = jumpMaxTimes;
-        }
-    }
     void Movement()
     {
         float hori = Input.GetAxis("Horizontal");
@@ -44,6 +41,12 @@ public class playerController : MonoBehaviour
     }
     void Jump()
     {
+        Gizmos.DrawRay(transform.position, new Vector2(transform.position.x, transform.position.y - rayDis));
+        onGround = Physics2D.Raycast(transform.position, Vector2.down, rayDis, groundMask);
+        if (onGround)
+        {
+            jumpTimes = jumpMaxTimes;
+        }
         jumpHold = Input.GetButton("Jump");
         if (Input.GetButtonDown("Jump") && jumpTimes > 0)
         {
@@ -56,7 +59,7 @@ public class playerController : MonoBehaviour
         if(jumpPressing)
         {
             isJump = true;
-            jumpTime = Time.time + 0.1f;
+            jumpTime = Time.time + 0.2f;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpPressing = false;
         }
