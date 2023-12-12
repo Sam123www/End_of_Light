@@ -135,6 +135,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 6536023163427953619, guid: f843628ac05a6ef419281a338ca25f2d, type: 3}
+      propertyPath: rayDis
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536023163427953619, guid: f843628ac05a6ef419281a338ca25f2d, type: 3}
+      propertyPath: jumpMaxTimes
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8115470194689069663, guid: f843628ac05a6ef419281a338ca25f2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.61969995
@@ -176,7 +184,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1379128114331661, guid: f843628ac05a6ef419281a338ca25f2d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f843628ac05a6ef419281a338ca25f2d, type: 3}
@@ -194,7 +203,7 @@ GameObject:
   - component: {fileID: 682899077}
   - component: {fileID: 682899079}
   - component: {fileID: 682899078}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}

@@ -8,14 +8,14 @@ public class playerController : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     [Header("collision")]
-    bool onGround;
-    float rayDis;
-    LayerMask groundMask;
+    public bool onGround;
+    public float rayDis;
+    public LayerMask groundMask;
     [Header("Movement")]
     public float Speed;
     [Header("Jump")]
     bool jumpPressing, isJump, jumpHold;
-    int jumpTimes;
+    public int jumpTimes;
     float jumpTime;
     public int jumpMaxTimes;
     public float jumpForce, jumpForceHold;
@@ -27,7 +27,8 @@ public class playerController : MonoBehaviour
     }
     void Update()
     {
-        Jump();
+        PhysicsCheck();
+        JumpCheck();
     }
     void FixedUpdate()
     {
@@ -39,10 +40,13 @@ public class playerController : MonoBehaviour
         float hori = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2 (hori*Speed, rb.velocity.y);
     }
-    void Jump()
+    void PhysicsCheck()
     {
-        Gizmos.DrawRay(transform.position, new Vector2(transform.position.x, transform.position.y - rayDis));
+        Debug.DrawRay(transform.position, Vector2.down*rayDis, Color.red);
         onGround = Physics2D.Raycast(transform.position, Vector2.down, rayDis, groundMask);
+    }
+    void JumpCheck()
+    {
         if (onGround)
         {
             jumpTimes = jumpMaxTimes;
@@ -50,7 +54,6 @@ public class playerController : MonoBehaviour
         jumpHold = Input.GetButton("Jump");
         if (Input.GetButtonDown("Jump") && jumpTimes > 0)
         {
-            jumpTimes--;
             jumpPressing = true;
         }
     }
@@ -62,6 +65,7 @@ public class playerController : MonoBehaviour
             jumpTime = Time.time + 0.2f;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpPressing = false;
+            jumpTimes--;
         }
         else if (isJump)
         {

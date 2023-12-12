@@ -20,7 +20,6 @@ public class playerAttack : MonoBehaviour
         hp -= harm;
         if (hp <= 0)
         {
-            print("1");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
