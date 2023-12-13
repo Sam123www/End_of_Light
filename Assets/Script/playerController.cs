@@ -9,7 +9,7 @@ public class playerController : MonoBehaviour
     Animator anim;
     [Header("collision")]
     public bool onGround;
-    public float rayDis;
+    public float check_x_size, check_y_size, check_offset;
     public LayerMask groundMask;
     [Header("Movement")]
     public float Speed;
@@ -42,8 +42,13 @@ public class playerController : MonoBehaviour
     }
     void PhysicsCheck()
     {
-        Debug.DrawRay(transform.position, Vector2.down*rayDis, Color.red);
-        onGround = Physics2D.Raycast(transform.position, Vector2.down, rayDis, groundMask);
+        Vector2 offset = new Vector2(0, -check_offset);
+        onGround = Physics2D.OverlapBox((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size), 0, groundMask);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Vector2 offset = new Vector2(0, -check_offset);
+        Gizmos.DrawWireCube((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size));
     }
     void JumpCheck()
     {

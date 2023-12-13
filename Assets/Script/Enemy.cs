@@ -2,14 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    void Start()
+    public bool playerCheck;
+    public float radius;
+    public LayerMask playerMask;
+    public Transform playerTransform;
+    protected Rigidbody2D rb;
+    protected void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
-    void Update()
+
+    protected virtual void Update()
     {
-        
+        print("1");
+        PhysicsCheck();
+    }
+    protected void PhysicsCheck()
+    {   
+        playerCheck = Physics2D.OverlapCircle(transform.position, radius, playerMask);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
