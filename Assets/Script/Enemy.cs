@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        print("1");
         PhysicsCheck();
     }
     protected void PhysicsCheck()

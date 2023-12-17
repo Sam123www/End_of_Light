@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    Animator anim;
+    
     [Header("collision")]
     public bool onGround;
     public float check_x_size, check_y_size, check_offset;
@@ -19,6 +20,11 @@ public class playerController : MonoBehaviour
     float jumpTime;
     public int jumpMaxTimes;
     public float jumpForce, jumpForceHold;
+    [Header("Animation")]
+    Animator anim;
+    string currentState;
+    const string anim_idle = "Idle";
+    const string anim_run = "Run";
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,9 +41,31 @@ public class playerController : MonoBehaviour
         JumpUp();
         Movement();
     }
+    void ChangeAnimationState(string newState)
+    {
+        if(currentState == newState) return;
+        anim.Play(newState);
+        currentState = newState;
+    }
     void Movement()
     {
         float hori = Input.GetAxis("Horizontal");
+        if (Mathf.Abs(hori) > 0)
+        {
+            ChangeAnimationState(anim_run);
+        }
+        else
+        {
+            ChangeAnimationState(anim_idle);
+        }
+        if(hori > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if(hori < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
         rb.velocity = new Vector2 (hori*Speed, rb.velocity.y);
     }
     void PhysicsCheck()
