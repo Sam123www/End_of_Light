@@ -9,7 +9,7 @@ public class playerController : MonoBehaviour
     Rigidbody2D rb;
     
     [Header("collision")]
-    public bool onGround;
+    public bool onGround, onGroundEnter;
     public float check_x_size, check_y_size, check_offset;
     public LayerMask groundMask;
     [Header("Movement")]
@@ -25,6 +25,9 @@ public class playerController : MonoBehaviour
     string currentState;
     const string anim_idle = "Idle";
     const string anim_run = "Run";
+    const string anim_jump = "Jump";
+    const string anim_fall = "Fall";
+    bool isFalling;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -80,9 +83,16 @@ public class playerController : MonoBehaviour
     }
     void JumpCheck()
     {
-        if (onGround)
+        if (onGround && !onGroundEnter)
         {
+            isFalling = false;
+            ChangeAnimationState(anim_idle);
             jumpTimes = jumpMaxTimes;
+            onGroundEnter = true;
+        }
+        else if (!onGround) 
+        {
+            onGroundEnter = false;
         }
         jumpHold = Input.GetButton("Jump");
         if (Input.GetButtonDown("Jump") && jumpTimes > 0)
@@ -92,8 +102,14 @@ public class playerController : MonoBehaviour
     }
     void JumpUp()
     {
-        if(jumpPressing)
+        if(rb.velocity.y < -0.1f && !isFalling)
         {
+            ChangeAnimationState(anim_fall);
+            isFalling = true;
+        }
+        if (jumpPressing)
+        {
+            ChangeAnimationState(anim_jump);
             isJump = true;
             jumpTime = Time.time + 0.2f;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
