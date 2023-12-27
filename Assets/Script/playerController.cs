@@ -7,7 +7,8 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    
+    [Header("Light")]
+    bool takingOutLight;
     [Header("collision")]
     public bool onGround, onGroundEnter;
     public float check_x_size, check_y_size, check_offset;
@@ -27,6 +28,7 @@ public class playerController : MonoBehaviour
     const string anim_run = "Run";
     const string anim_jump = "Jump";
     const string anim_fall = "Fall";
+    const string anim_takeOutLight = "TakeOutLight";
     bool isFalling;
     void Start()
     {
@@ -36,6 +38,8 @@ public class playerController : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q)) takingOutLight = !takingOutLight;
+        Animation();
         PhysicsCheck();
         JumpCheck();
     }
@@ -50,17 +54,34 @@ public class playerController : MonoBehaviour
         anim.Play(newState);
         currentState = newState;
     }
+    void Animation()
+    {
+        if (takingOutLight)
+        {
+            ChangeAnimationState(anim_takeOutLight);
+        }
+        else
+        {
+            if (onGround)
+            {
+                if (Mathf.Abs(rb.velocity.x) > 0.1)
+                    ChangeAnimationState(anim_run);
+                else
+                    ChangeAnimationState(anim_idle);
+            }
+            else
+            {
+                if (rb.velocity.y < -0.1)
+                    ChangeAnimationState(anim_fall);
+                else if (rb.velocity.y > 0.1)
+                    ChangeAnimationState(anim_jump);
+            }
+        }
+    }
     void Movement()
     {
         float hori = Input.GetAxis("Horizontal");
         if (Mathf.Abs(hori) > 0)
-        {
-            ChangeAnimationState(anim_run);
-        }
-        else
-        {
-            ChangeAnimationState(anim_idle);
-        }
         if(hori > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -86,7 +107,6 @@ public class playerController : MonoBehaviour
         if (onGround && !onGroundEnter)
         {
             isFalling = false;
-            ChangeAnimationState(anim_idle);
             jumpTimes = jumpMaxTimes;
             onGroundEnter = true;
         }
@@ -104,12 +124,10 @@ public class playerController : MonoBehaviour
     {
         if(rb.velocity.y < -0.1f && !isFalling)
         {
-            ChangeAnimationState(anim_fall);
             isFalling = true;
         }
         if (jumpPressing)
         {
-            ChangeAnimationState(anim_jump);
             isJump = true;
             jumpTime = Time.time + 0.2f;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
