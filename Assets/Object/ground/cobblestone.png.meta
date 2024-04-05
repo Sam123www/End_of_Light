@@ -1,0 +1,608 @@
+fileFormatVersion: 2
+guid: a919de4996f783c4e905826b5560d69d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cobblestone_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1747
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 80, y: 8}
+        - {x: 6, y: -26}
+        - {x: 6, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1c477fe24ea96f47a6271c9ecde5102
+      internalID: -360756923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_2
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1757
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 11}
+        - {x: -128, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 11}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 889773ed383c848469b68e853849cbf2
+      internalID: 1132028198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_3
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 1758
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 4}
+        - {x: -128, y: -128}
+        - {x: 40, y: -128}
+        - {x: 40, y: -13}
+        - {x: 18, y: 4}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecb52f23449bd9b46b071d724a1b0c2e
+      internalID: -226605912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1664
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -18, y: 128}
+        - {x: -74, y: 117}
+        - {x: -107, y: 102}
+        - {x: -128, y: 71}
+        - {x: -128, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ba2b9f1e9ebe204eadee06392a5bbc2
+      internalID: -453793531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_5
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1664
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 110}
+        - {x: 125, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5925c601a3d3c4e4a924e90ea416feaa
+      internalID: 252723067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_6
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1408
+        width: 255
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6.5, y: 128}
+        - {x: -24.5, y: 101}
+        - {x: -24.5, y: 39}
+        - {x: -4.5, y: -126}
+        - {x: 0.5, y: -128}
+        - {x: 127.5, y: -128}
+        - {x: 127.5, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf38bb4d15d800743b58f13ef8ad5074
+      internalID: 2058128845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_8
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1408
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0fb9dcb3f54c8f429d69541247de5f2
+      internalID: 957646018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_9
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 1408
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 35, y: 128}
+        - {x: -128, y: 128}
+        - {x: -128, y: -128}
+        - {x: 36, y: -128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: da9c125236db76d4cb4cad1edf797083
+      internalID: 1786101243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_10
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1050
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 1, y: 128}
+        - {x: -1, y: 127}
+        - {x: -1, y: 18}
+        - {x: 78, y: -27}
+        - {x: 115, y: -27}
+        - {x: 128, y: -22}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 595b1697bd48ea740957993cefff7b6b
+      internalID: -2059720108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_12
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1050
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -22}
+        - {x: -102, y: -37}
+        - {x: 74, y: -37}
+        - {x: 122, y: -35}
+        - {x: 128, y: -26}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d13cb3eb004c52438db5b131d4e5af6
+      internalID: -1617167993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_13
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 1050
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -24}
+        - {x: -117, y: -37}
+        - {x: 20, y: -37}
+        - {x: 63, y: 29}
+        - {x: 63, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d07435c95b958b645b5666d4d3e9b4c6
+      internalID: -260107720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1152
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -59}
+        - {x: -93, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: de4e9758ca7791847ad2331dc0b70660
+      internalID: 459659266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -128}
+        - {x: 65, y: -128}
+        - {x: 128, y: -92}
+        - {x: 128, y: 128}
+      - - {x: 125, y: -115}
+        - {x: 127, y: -117}
+        - {x: 128, y: -117}
+        - {x: 128, y: -112}
+        - {x: 126, y: -112}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d2e3fd5d3b0d654682112e20e8adeab
+      internalID: -1526303918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_20
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 605
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -22}
+        - {x: -118, y: -36}
+        - {x: 112, y: -36}
+        - {x: 128, y: -34}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8573bf3ccb32d24b8113f51088d1c21
+      internalID: 187474856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_21
+      rect:
+        serializedVersion: 2
+        x: 1460
+        y: 605
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: -43}
+        - {x: -111, y: -86}
+        - {x: -93, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d92e560699d686643ac63b3b3b3176af
+      internalID: 1013934804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cobblestone_23
+      rect:
+        serializedVersion: 2
+        x: 1460
+        y: 349
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -15, y: 128}
+        - {x: -25, y: 119}
+        - {x: -25, y: -29}
+        - {x: -5, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e77b7a1144231d140b35730f0dea33d4
+      internalID: -1828607918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      cobblestone_0: -360756923
+      cobblestone_1: -938324883
+      cobblestone_10: -2059720108
+      cobblestone_11: -132855036
+      cobblestone_12: -1617167993
+      cobblestone_13: -260107720
+      cobblestone_14: 459659266
+      cobblestone_15: -1526303918
+      cobblestone_16: 547865687
+      cobblestone_17: -1153089290
+      cobblestone_18: 262124440
+      cobblestone_19: -424462558
+      cobblestone_2: 1132028198
+      cobblestone_20: 187474856
+      cobblestone_21: 1013934804
+      cobblestone_22: 237516785
+      cobblestone_23: -1828607918
+      cobblestone_24: 387817188
+      cobblestone_3: -226605912
+      cobblestone_4: -453793531
+      cobblestone_5: 252723067
+      cobblestone_6: 2058128845
+      cobblestone_7: 86368786
+      cobblestone_8: 957646018
+      cobblestone_9: 1786101243
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
