@@ -373,10 +373,10 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  Speed: 6
+  Speed: 4
   jumpTimes: 0
   jumpMaxTimes: 2
-  jumpForce: 15
+  jumpForce: 10
   jumpForceHold: 0.8
 --- !u!114 &2251272233854636535
 MonoBehaviour:
@@ -412,7 +412,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: 00e23511408cdc44ebff5af83376c78d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2

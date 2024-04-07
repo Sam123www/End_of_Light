@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
-    public bool playerCheck;
-    public float radius;
+    public bool playerCheck_circle, playerCheck_L, playerCheck_R;
+    public float range_radius, range_x, range_y, offset_y;
     public LayerMask playerMask;
     public Transform playerTransform;
     protected Rigidbody2D rb;
+    protected Animator anim;
     protected void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -19,11 +22,17 @@ public class Enemy : MonoBehaviour
         PhysicsCheck();
     }
     protected void PhysicsCheck()
-    {   
-        playerCheck = Physics2D.OverlapCircle(transform.position, radius, playerMask);
+    {
+        playerCheck_circle = Physics2D.OverlapCircle(transform.position, range_radius, playerMask);
+        Vector2 pointA = new Vector2(transform.position.x - range_x, transform.position.y + range_y + offset_y);
+        Vector2 pointB = new Vector2(transform.position.x + range_x, transform.position.y + range_y + offset_y);
+        Vector2 pointO = new Vector2(transform.position.x, transform.position.y - range_y + offset_y);
+        playerCheck_L = Physics2D.OverlapArea(pointA, pointO, playerMask);
+        playerCheck_R = Physics2D.OverlapArea(pointB, pointO, playerMask);
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, range_radius);
+        Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + offset_y, 0), new Vector3(range_x, range_y, 1));
     }
 }

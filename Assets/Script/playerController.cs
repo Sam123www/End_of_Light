@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) takingOutLight = !takingOutLight;
+        if (Input.GetKeyDown(KeyCode.Q)) takingOutLight = true;
         Animation();
         PhysicsCheck();
         JumpCheck();
@@ -59,6 +59,20 @@ public class playerController : MonoBehaviour
         if (takingOutLight)
         {
             ChangeAnimationState(anim_takeOutLight);
+            if (onGround)
+            {
+                if (Mathf.Abs(rb.velocity.x) > 0.1)
+                    ChangeAnimationState(anim_run);
+                else
+                    ChangeAnimationState(anim_idle);
+            }
+            else
+            {
+                if (rb.velocity.y < -0.1)
+                    ChangeAnimationState(anim_fall);
+                else if (rb.velocity.y > 0.1)
+                    ChangeAnimationState(anim_jump);
+            }
         }
         else
         {
@@ -77,6 +91,10 @@ public class playerController : MonoBehaviour
                     ChangeAnimationState(anim_jump);
             }
         }
+    }
+    public void takeOutLightEnd()
+    {
+        takingOutLight = false;
     }
     void Movement()
     {
