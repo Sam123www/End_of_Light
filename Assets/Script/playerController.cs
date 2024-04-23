@@ -8,7 +8,8 @@ public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
     [Header("Light")]
-    bool takingOutLight;
+    bool takingOutLight, turnOffLight, isLighting;
+    public GameObject Light;
     [Header("collision")]
     public bool onGround, onGroundEnter;
     public float check_x_size, check_y_size, check_offset;
@@ -29,6 +30,7 @@ public class playerController : MonoBehaviour
     const string anim_jump = "Jump";
     const string anim_fall = "Fall";
     const string anim_takeOutLight = "TakeOutLight";
+    const string anim_turnOffLight = "TurnOffLight";
     bool isFalling;
     void Start()
     {
@@ -38,7 +40,16 @@ public class playerController : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) takingOutLight = true;
+        if (Input.GetKeyDown(KeyCode.Q) && !takingOutLight && !isLighting)
+        {
+            takingOutLight = true;
+            isLighting = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) && !turnOffLight && isLighting)
+        {
+            turnOffLight = true;
+            isLighting = false;
+        }
         Animation();
         PhysicsCheck();
         JumpCheck();
@@ -59,20 +70,10 @@ public class playerController : MonoBehaviour
         if (takingOutLight)
         {
             ChangeAnimationState(anim_takeOutLight);
-            if (onGround)
-            {
-                if (Mathf.Abs(rb.velocity.x) > 0.1)
-                    ChangeAnimationState(anim_run);
-                else
-                    ChangeAnimationState(anim_idle);
-            }
-            else
-            {
-                if (rb.velocity.y < -0.1)
-                    ChangeAnimationState(anim_fall);
-                else if (rb.velocity.y > 0.1)
-                    ChangeAnimationState(anim_jump);
-            }
+        }
+        else if (turnOffLight)
+        {
+            ChangeAnimationState(anim_turnOffLight);
         }
         else
         {
@@ -95,6 +96,15 @@ public class playerController : MonoBehaviour
     public void takeOutLightEnd()
     {
         takingOutLight = false;
+    }
+    public void turnOffLightEnd()
+    {
+        turnOffLight = false;
+    }
+    public void switchLight(string state)
+    {
+        if (state == "on") Light.SetActive(true);
+        else Light.SetActive(false);
     }
     void Movement()
     {
