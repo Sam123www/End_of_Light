@@ -7,22 +7,23 @@ using UnityEngine.SceneManagement;
 
 public class playerAttack : MonoBehaviour
 {
-    public GameObject Light;
+    public Transform lightTrans, attackTrans;
     public bool lightCheck;
-    public float lightRange;
+    public float lightRange, attackRange;
     public float hp;
-    public LayerMask GhostMask;
+    public LayerMask ghostLayer, enemyLayer;
     void Start()
     {
         
     }
     void Update()
     {
-        lightCheck = Physics2D.OverlapCircle(Light.transform.position, lightRange, GhostMask);
+        lightCheck = Physics2D.OverlapCircle(lightTrans.position, lightRange, ghostLayer);
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(Light.transform.position, lightRange);
+        Gizmos.DrawWireSphere(lightTrans.position, lightRange);
+        Gizmos.DrawWireSphere(attackTrans.position, attackRange);
     }
     void reduceHp(float harm)
     {
@@ -38,5 +39,18 @@ public class playerAttack : MonoBehaviour
         {
             reduceHp(1f);
         }
+    }
+    public void Attack()
+    {
+        
+        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackTrans.position, attackRange, enemyLayer);
+        foreach(Collider2D collider in detectedObjects)
+        {
+            Debug.Log(collider.gameObject.name);
+        }
+    }
+    public void AttackEnd()
+    {
+        playerController.PlayerController.isAttacking = false;
     }
 }

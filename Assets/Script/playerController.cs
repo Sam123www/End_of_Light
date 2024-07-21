@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
+    public static playerController PlayerController;
     Rigidbody2D rb;
     [Header("Light")]
     bool takingOutLight, turnOffLight, isLighting;
@@ -31,7 +32,12 @@ public class playerController : MonoBehaviour
     const string anim_fall = "Fall";
     const string anim_takeOutLight = "TakeOutLight";
     const string anim_turnOffLight = "TurnOffLight";
-    bool isFalling;
+    const string anim_attack = "Attack";
+    public bool isFalling, isAttacking;
+    private void Awake()
+    {
+        PlayerController = this;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -61,7 +67,7 @@ public class playerController : MonoBehaviour
     }
     void ChangeAnimationState(string newState)
     {
-        if(currentState == newState) return;
+        if(currentState == newState || isAttacking) return;
         anim.Play(newState);
         currentState = newState;
     }
@@ -77,7 +83,13 @@ public class playerController : MonoBehaviour
         }
         else
         {
-            if (onGround)
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Debug.Log("attack!");
+                ChangeAnimationState(anim_attack);
+                isAttacking = true;
+            }
+            else if (onGround)
             {
                 if (Mathf.Abs(rb.velocity.x) > 0.1)
                     ChangeAnimationState(anim_run);
@@ -93,6 +105,7 @@ public class playerController : MonoBehaviour
             }
         }
     }
+
     public void takeOutLightEnd()
     {
         takingOutLight = false;
