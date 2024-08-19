@@ -10,7 +10,7 @@ public class playerAttack : MonoBehaviour
     public Transform lightTrans, attackTrans;
     public bool lightCheck;
     public float lightRange, attackRange;
-    public float hp;
+    public float hp, damage;
     public LayerMask ghostLayer, enemyLayer;
     void Start()
     {
@@ -42,15 +42,20 @@ public class playerAttack : MonoBehaviour
     }
     public void Attack()
     {
-        
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackTrans.position, attackRange, enemyLayer);
         foreach(Collider2D collider in detectedObjects)
         {
             Debug.Log(collider.gameObject.name);
+            if(collider.transform.position.x > transform.position.x)
+            {
+                float[] data = { damage, 0 };
+                collider.gameObject.SendMessage("onDamage", data);
+            }
+            else
+            {
+                float[] data = { damage, 1 };
+                collider.gameObject.SendMessage("onDamage", data);
+            }
         }
-    }
-    public void AttackEnd()
-    {
-        playerController.PlayerController.isAttacking = false;
     }
 }

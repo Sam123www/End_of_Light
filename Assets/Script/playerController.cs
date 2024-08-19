@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    public static playerController PlayerController;
     Rigidbody2D rb;
     [Header("Light")]
     bool takingOutLight, turnOffLight, isLighting;
@@ -34,10 +33,8 @@ public class playerController : MonoBehaviour
     const string anim_turnOffLight = "TurnOffLight";
     const string anim_attack = "Attack";
     public bool isFalling, isAttacking;
-    private void Awake()
-    {
-        PlayerController = this;
-    }
+    [Header("Attack")]
+    public float attackTime;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -67,7 +64,7 @@ public class playerController : MonoBehaviour
     }
     void ChangeAnimationState(string newState)
     {
-        if(currentState == newState || isAttacking) return;
+        if (currentState == newState || isAttacking) return;
         anim.Play(newState);
         currentState = newState;
     }
@@ -83,11 +80,12 @@ public class playerController : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && !isAttacking)
             {
                 Debug.Log("attack!");
                 ChangeAnimationState(anim_attack);
                 isAttacking = true;
+                Invoke("AttackEnd", attackTime);
             }
             else if (onGround)
             {
@@ -104,6 +102,11 @@ public class playerController : MonoBehaviour
                     ChangeAnimationState(anim_jump);
             }
         }
+    }
+
+    void AttackEnd()
+    {
+        isAttacking = false;
     }
 
     public void takeOutLightEnd()

@@ -498,6 +498,7 @@ MonoBehaviour:
   jumpForceHold: 0.6
   isFalling: 0
   isAttacking: 0
+  attackTime: 0.3
 --- !u!114 &2251272233854636535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +517,7 @@ MonoBehaviour:
   lightRange: 4.59
   attackRange: 1.14
   hp: 3
+  damage: 10
   ghostLayer:
     serializedVersion: 2
     m_Bits: 0
