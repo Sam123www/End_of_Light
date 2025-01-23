@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyGhost : Enemy
@@ -25,23 +26,24 @@ public class EnemyGhost : Enemy
                     status = Status.track;
                 break;
             case Status.track:
-                float x = playerTransform.position.x - transform.position.x;
-                float y = playerTransform.position.y - transform.position.y;
-                float r = math.sqrt(x * x + y * y);
-                x /= r;
-                y /= r;
-                transform.position = new Vector2(transform.position.x + x * Speed * 0.001f, transform.position.y + y * Speed * 0.001f);
-                if(!playerCheck_circle) status = Status.avoid;
+                if (playerCheck_circle != null)
+                {
+                    playerTransform = playerCheck_circle.transform;
+                    transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, Speed*0.001f);
+                }
                 break;
             case Status.avoid:
-                x = playerTransform.position.x - transform.position.x;
-                y = playerTransform.position.y - transform.position.y;
-                r = math.sqrt(x * x + y * y);
-                x /= r;
-                y /= r;
-                transform.position = new Vector2(transform.position.x + x * Speed * (-0.003f), transform.position.y + y * Speed * (-0.003f));
+                Invoke("Track", 2f);
+                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, -Speed*0.003f);
                 break;
-
         }
+    }
+    public void Avoid()
+    {
+        status = Status.avoid;
+    }
+    void Track()
+    {
+        status = Status.track;
     }
 }

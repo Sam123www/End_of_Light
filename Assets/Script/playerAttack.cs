@@ -9,18 +9,17 @@ public class playerAttack : MonoBehaviour
 {
     Rigidbody2D rb;
     public Transform lightTrans, attackTrans;
-    public bool lightCheck;
     public float hurtSpeed_x, hurtSpeed_y;
     public float lightRange, attackRange;
     public float damage;
-    public LayerMask ghostLayer, enemyLayer;
+    public LayerMask ghostLayer, enemyLayer, tombLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
-        lightCheck = Physics2D.OverlapCircle(lightTrans.position, lightRange, ghostLayer);
+        Light();
     }
     private void OnDrawGizmosSelected()
     {
@@ -68,6 +67,25 @@ public class playerAttack : MonoBehaviour
             {
                 float[] data = { damage, 1 };
                 collider.gameObject.SendMessage("onDamage", data);
+            }
+        }
+    }
+    void Light()
+    {
+        Collider2D[] lightCheckGhost = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, ghostLayer);
+        if (lightCheckGhost != null && playerController.player_controller.Light.activeInHierarchy)
+        {
+            foreach(Collider2D collider in lightCheckGhost)
+            {
+                collider.gameObject.SendMessage("Avoid");
+            }
+        }
+        Collider2D[] lightChectTomb = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, tombLayer);
+        if (lightCheckGhost != null && playerController.player_controller.Light.activeInHierarchy)
+        {
+            foreach (Collider2D collider in lightChectTomb)
+            {
+                collider.gameObject.SendMessage("Enable");
             }
         }
     }

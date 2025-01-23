@@ -514,7 +514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightTrans: {fileID: 2256269027998771049}
   attackTrans: {fileID: 2725084523035022090}
-  lightCheck: 0
   hurtSpeed_x: 6
   hurtSpeed_y: 3
   lightRange: 4.59
@@ -522,10 +521,13 @@ MonoBehaviour:
   damage: 10
   ghostLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  tombLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!50 &8278145006661630730
 Rigidbody2D:
   serializedVersion: 4

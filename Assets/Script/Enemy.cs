@@ -5,8 +5,9 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
-    public bool playerCheck_circle, playerCheck_L, playerCheck_R;
+    public bool playerCheck_L, playerCheck_R;
     public float range_radius, range_x, range_y, offset_y, hp, damage;
+    public Collider2D playerCheck_circle;
     public LayerMask playerMask;
     public Transform playerTransform;
     protected Rigidbody2D rb;

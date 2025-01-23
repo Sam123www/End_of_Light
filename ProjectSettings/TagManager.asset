@@ -16,8 +16,8 @@ TagManager:
   - Player
   - Ghost
   - Enemy
-  - 
-  - 
+  - Tomb
+  - Drop
   - 
   - 
   - 
@@ -51,4 +51,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3928980359
+    locked: 0
+  - name: ForeEnemy
+    uniqueID: 2795873599
     locked: 0

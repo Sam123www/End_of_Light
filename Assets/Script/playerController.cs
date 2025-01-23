@@ -9,7 +9,7 @@ public class playerController : MonoBehaviour
     Rigidbody2D rb;
     public static playerController player_controller;
     [Header("Light")]
-    bool takingOutLight, turnOffLight, isLighting;
+    public bool takingOutLight, turnOffLight, isLighting;
     public GameObject Light;
     [Header("collision")]
     public bool onGround, onGroundEnter;
@@ -52,7 +52,7 @@ public class playerController : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !takingOutLight && !isLighting)
+        if (Input.GetKeyDown(KeyCode.Q) && !takingOutLight && !isLighting && float.Parse(player_UI.playerUI.lightnum.text) > 0)
         {
             takingOutLight = true;
             isLighting = true;
