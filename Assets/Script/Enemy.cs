@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class Enemy : MonoBehaviour
 {
     public bool playerCheck_circle, playerCheck_L, playerCheck_R;
-    public float range_radius, range_x, range_y, offset_y, hp;
+    public float range_radius, range_x, range_y, offset_y, hp, damage;
     public LayerMask playerMask;
     public Transform playerTransform;
     protected Rigidbody2D rb;
@@ -35,5 +35,21 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range_radius);
         Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + offset_y, 0), new Vector3(range_x, range_y, 1));
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && damage > 0)
+        {
+            if (collision.transform.position.x > transform.position.x)
+            {
+                float[] data = { damage, 0 };
+                collision.gameObject.SendMessage("reduceHp", data);
+            }
+            else
+            {
+                float[] data = { damage, 1 };
+                collision.gameObject.SendMessage("reduceHp", data);
+            }
+            Debug.Log("hurt");
+        }
+    }
 }

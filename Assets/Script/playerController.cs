@@ -7,6 +7,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
+    public static playerController player_controller;
     [Header("Light")]
     bool takingOutLight, turnOffLight, isLighting;
     public GameObject Light;
@@ -16,6 +17,7 @@ public class playerController : MonoBehaviour
     public LayerMask groundMask;
     [Header("Movement")]
     public float Speed;
+    public bool canMove = true;
     [Header("Jump")]
     bool jumpPressing, isJump, jumpHold;
     public int jumpTimes;
@@ -35,6 +37,13 @@ public class playerController : MonoBehaviour
     public bool isFalling, isAttacking;
     [Header("Attack")]
     public float attackTime;
+    void Awake()
+    {
+        if(player_controller == null)
+        {
+            player_controller = this;
+        }
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,8 +68,11 @@ public class playerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        JumpUp();
-        Movement();
+        if (canMove)
+        {
+            JumpUp();
+            Movement();
+        }
     }
     void ChangeAnimationState(string newState)
     {

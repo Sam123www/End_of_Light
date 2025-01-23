@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 994550613944777688}
   m_Layer: 6
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -492,6 +492,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   Speed: 5
+  canMove: 1
   jumpTimes: 0
   jumpMaxTimes: 2
   jumpForce: 10
@@ -514,9 +515,10 @@ MonoBehaviour:
   lightTrans: {fileID: 2256269027998771049}
   attackTrans: {fileID: 2725084523035022090}
   lightCheck: 0
+  hurtSpeed_x: 6
+  hurtSpeed_y: 3
   lightRange: 4.59
   attackRange: 1.14
-  hp: 3
   damage: 10
   ghostLayer:
     serializedVersion: 2

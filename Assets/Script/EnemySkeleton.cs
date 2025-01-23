@@ -62,6 +62,7 @@ public class EnemySekelton : Enemy
     }
     IEnumerator goDead()
     {
+        damage = 0;
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
