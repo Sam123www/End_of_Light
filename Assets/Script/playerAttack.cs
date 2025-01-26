@@ -12,7 +12,7 @@ public class playerAttack : MonoBehaviour
     public float hurtSpeed_x, hurtSpeed_y;
     public float lightRange, attackRange;
     public float damage;
-    public LayerMask ghostLayer, enemyLayer, tombLayer;
+    public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -80,10 +80,18 @@ public class playerAttack : MonoBehaviour
                 collider.gameObject.SendMessage("Avoid");
             }
         }
-        Collider2D[] lightChectTomb = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, tombLayer);
+        Collider2D[] lightCheckTomb = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, tombLayer);
         if (lightCheckGhost != null && playerController.player_controller.Light.activeInHierarchy)
         {
-            foreach (Collider2D collider in lightChectTomb)
+            foreach (Collider2D collider in lightCheckTomb)
+            {
+                collider.gameObject.SendMessage("Enable");
+            }
+        }
+        Collider2D[] lightCheckTrap = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, trapLayer);
+        if (lightCheckTrap != null && playerController.player_controller.Light.activeInHierarchy)
+        {
+            foreach (Collider2D collider in lightCheckTrap)
             {
                 collider.gameObject.SendMessage("Enable");
             }

@@ -17,17 +17,39 @@ public class EnemySekelton : Enemy
     void Start()
     {
         status = Status.idle;
+        StartCoroutine(wallChecking());
     }
     protected override void Update()
     {
         base.Update();
         Animation();
     }
+    IEnumerator wallChecking()
+    {
+        wallCheck = Physics2D.OverlapBox(transform.position, new Vector2(range_wall, 1), 0, groundMask);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(wallChecking());
+    }
     private void FixedUpdate()
     {
         switch(status)
         {
             case Status.idle:
+                if (wallCheck)
+                {
+                    wallCheck = false;
+                    isRight = !isRight;
+                }
+                if (isRight)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    rb.velocity = new Vector2(Speed, rb.velocity.y);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    rb.velocity = new Vector2(-Speed, rb.velocity.y);
+                }
                 if (playerCheck_L || playerCheck_R)
                     status = Status.track;
                 break;

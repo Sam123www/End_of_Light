@@ -24,9 +24,14 @@ public class NewBehaviourScript : MonoBehaviour
             Instantiate(skeleton, transform.position, Quaternion.identity);
         }
     }
+    
     public void Enable()
     {
-        isEnable = true;
         GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1, 1);
+        Invoke("Begin", 1);
+    }
+    void Begin()
+    {
+        isEnable = true;
     }
 }

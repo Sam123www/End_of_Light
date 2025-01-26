@@ -131,18 +131,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c99286f092b3a46807b5ce67b4f8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCheck_circle: 0
   playerCheck_L: 0
   playerCheck_R: 0
+  wallCheck: 0
   range_radius: 0
   range_x: 13.1
   range_y: 3
   offset_y: 0.88
   hp: 50
   damage: 5
+  range_wall: 1.3
+  playerCheck_circle: {fileID: 0}
   playerMask:
     serializedVersion: 2
     m_Bits: 64
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
   playerTransform: {fileID: 0}
   isRight: 0
   Speed: 2

@@ -482,6 +482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6961ba3f4245af24d9f6428b0094db2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  takingOutLight: 0
+  turnOffLight: 0
+  isLighting: 0
   Light: {fileID: 8499941827048993954}
   onGround: 0
   onGroundEnter: 0
@@ -528,6 +531,9 @@ MonoBehaviour:
   tombLayer:
     serializedVersion: 2
     m_Bits: 512
+  trapLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!50 &8278145006661630730
 Rigidbody2D:
   serializedVersion: 4

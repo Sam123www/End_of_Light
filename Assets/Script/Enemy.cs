@@ -5,10 +5,10 @@ using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
-    public bool playerCheck_L, playerCheck_R;
-    public float range_radius, range_x, range_y, offset_y, hp, damage;
+    public bool playerCheck_L, playerCheck_R, wallCheck;
+    public float range_radius, range_x, range_y, offset_y, hp, damage, range_wall;
     public Collider2D playerCheck_circle;
-    public LayerMask playerMask;
+    public LayerMask playerMask, groundMask;
     public Transform playerTransform;
     protected Rigidbody2D rb;
     protected Animator anim;
@@ -30,11 +30,14 @@ public class Enemy : MonoBehaviour
         Vector2 pointO = new Vector2(transform.position.x, transform.position.y - range_y + offset_y);
         playerCheck_L = Physics2D.OverlapArea(pointA, pointO, playerMask);
         playerCheck_R = Physics2D.OverlapArea(pointB, pointO, playerMask);
+        
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, range_radius);
         Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + offset_y, 0), new Vector3(range_x, range_y, 1));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, new Vector2(range_wall, 1));
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
