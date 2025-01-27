@@ -8,6 +8,7 @@ public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
     public static playerController player_controller;
+    bool onOneWayGround = false;
     [Header("Light")]
     public bool takingOutLight, turnOffLight, isLighting;
     public GameObject Light;
@@ -101,7 +102,8 @@ public class playerController : MonoBehaviour
             }
             else if (onGround)
             {
-                if (Mathf.Abs(rb.velocity.x) > 0.1)
+                float hori = Input.GetAxis("Horizontal");
+                if (Mathf.Abs(hori) > 0)
                     ChangeAnimationState(anim_run);
                 else
                     ChangeAnimationState(anim_idle);
@@ -137,7 +139,6 @@ public class playerController : MonoBehaviour
     void Movement()
     {
         float hori = Input.GetAxis("Horizontal");
-        if (Mathf.Abs(hori) > 0)
         if(hori > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -171,7 +172,7 @@ public class playerController : MonoBehaviour
             onGroundEnter = false;
         }
         jumpHold = Input.GetButton("Jump");
-        if (Input.GetButtonDown("Jump") && jumpTimes > 0)
+        if (Input.GetButtonDown("Jump") && jumpTimes > 0 && (!onOneWayGround || Input.GetAxis("Vertical") >= 0))
         {
             jumpPressing = true;
         }
@@ -200,6 +201,24 @@ public class playerController : MonoBehaviour
             {
                 isJump = false;
             }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("oneWayGround"))
+        {
+            onOneWayGround = true;
+            if (Input.GetAxis("Vertical") < 0 && Input.GetButton("Jump"))
+            {
+                collision.gameObject.GetComponent<Collider2D>().enabled = false;
+            }
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("oneWayGround"))
+        {
+            collision.gameObject.GetComponent<Collider2D>().enabled = true;
         }
     }
 }
