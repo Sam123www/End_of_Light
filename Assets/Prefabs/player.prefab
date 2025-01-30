@@ -482,23 +482,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6961ba3f4245af24d9f6428b0094db2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  oneWayGroundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   takingOutLight: 0
   turnOffLight: 0
   isLighting: 0
   Light: {fileID: 8499941827048993954}
   onGround: 0
   onGroundEnter: 0
+  onOneWayGroundTop: 0
+  onOneWayGroundBottom: 0
   check_x_size: 0.43
   check_y_size: 0.23
-  check_offset: 0.45
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
+  check_offset_down: 0.37
+  check_offset_top: 1.53
   Speed: 5
   canMove: 1
   jumpTimes: 0
   jumpMaxTimes: 2
-  jumpForce: 10
+  jumpForce: 15
   jumpForceHold: 0.6
   isFalling: 0
   isAttacking: 0

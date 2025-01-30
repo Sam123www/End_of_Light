@@ -8,14 +8,15 @@ public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
     public static playerController player_controller;
-    bool onOneWayGround = false;
+    public LayerMask playerLayer, groundLayer, oneWayGroundLayer;
     [Header("Light")]
     public bool takingOutLight, turnOffLight, isLighting;
     public GameObject Light;
     [Header("collision")]
+    Collider2D coll;
+    Collider2D onOneWayGroundTop, onOneWayGroundBottom;
     public bool onGround, onGroundEnter;
-    public float check_x_size, check_y_size, check_offset;
-    public LayerMask groundMask;
+    public float check_x_size, check_y_size, check_offset_down, check_offset_top;
     [Header("Movement")]
     public float Speed;
     public bool canMove = true;
@@ -47,6 +48,7 @@ public class playerController : MonoBehaviour
     }
     void Start()
     {
+        coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         jumpTimes = jumpMaxTimes;
@@ -66,6 +68,7 @@ public class playerController : MonoBehaviour
         Animation();
         PhysicsCheck();
         JumpCheck();
+        oneWayGroundCheck();
     }
     void FixedUpdate()
     {
@@ -151,12 +154,18 @@ public class playerController : MonoBehaviour
     }
     void PhysicsCheck()
     {
-        Vector2 offset = new Vector2(0, -check_offset);
-        onGround = Physics2D.OverlapBox((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size), 0, groundMask);
+        Vector2 offset = new Vector2(0, -check_offset_down);
+        onOneWayGroundBottom = Physics2D.OverlapBox((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size), 0, oneWayGroundLayer);
+        onGround = Physics2D.OverlapBox((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size), 0, groundLayer);
+        onGround = onGround || onOneWayGroundBottom;
+        offset = new Vector2(0, check_offset_top);
+        onOneWayGroundTop = Physics2D.OverlapBox((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size), 0, oneWayGroundLayer);
     }
     private void OnDrawGizmosSelected()
     {
-        Vector2 offset = new Vector2(0, -check_offset);
+        Vector2 offset = new Vector2(0, -check_offset_down);
+        Gizmos.DrawWireCube((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size));
+        offset = new Vector2(0, check_offset_top);
         Gizmos.DrawWireCube((Vector2)transform.position + offset, new Vector2(check_x_size, check_y_size));
     }
     void JumpCheck()
@@ -172,7 +181,7 @@ public class playerController : MonoBehaviour
             onGroundEnter = false;
         }
         jumpHold = Input.GetButton("Jump");
-        if (Input.GetButtonDown("Jump") && jumpTimes > 0 && (!onOneWayGround || Input.GetAxis("Vertical") >= 0))
+        if (Input.GetButtonDown("Jump") && jumpTimes > 0 && (!onOneWayGroundBottom || Input.GetAxis("Vertical") >= 0))
         {
             jumpPressing = true;
         }
@@ -203,22 +212,17 @@ public class playerController : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    void oneWayGroundCheck()
     {
-        if (collision.gameObject.CompareTag("oneWayGround"))
+        if(onOneWayGroundBottom && Input.GetAxis("Vertical") < 0 && Input.GetButton("Jump"))
         {
-            onOneWayGround = true;
-            if (Input.GetAxis("Vertical") < 0 && Input.GetButton("Jump"))
-            {
-                collision.gameObject.GetComponent<Collider2D>().enabled = false;
-            }
+            onOneWayGroundBottom.usedByEffector = false;
+            Physics2D.IgnoreLayerCollision(6, 12, true);
         }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("oneWayGround"))
+        if (onOneWayGroundTop)
         {
-            collision.gameObject.GetComponent<Collider2D>().enabled = true;
+            onOneWayGroundTop.usedByEffector = true;
+            Physics2D.IgnoreLayerCollision(6, 12, false);
         }
     }
 }
