@@ -176,8 +176,9 @@ public class playerController : MonoBehaviour
             jumpTimes = jumpMaxTimes;
             onGroundEnter = true;
         }
-        else if (!onGround) 
+        else if (!onGround && onGroundEnter) 
         {
+            jumpTimes = jumpMaxTimes-1;
             onGroundEnter = false;
         }
         jumpHold = Input.GetButton("Jump");

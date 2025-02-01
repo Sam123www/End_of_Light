@@ -497,8 +497,6 @@ MonoBehaviour:
   Light: {fileID: 8499941827048993954}
   onGround: 0
   onGroundEnter: 0
-  onOneWayGroundTop: 0
-  onOneWayGroundBottom: 0
   check_x_size: 0.43
   check_y_size: 0.23
   check_offset_down: 0.37
@@ -506,7 +504,7 @@ MonoBehaviour:
   Speed: 5
   canMove: 1
   jumpTimes: 0
-  jumpMaxTimes: 2
+  jumpMaxTimes: 1
   jumpForce: 15
   jumpForceHold: 0.6
   isFalling: 0

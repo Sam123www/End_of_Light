@@ -163,16 +163,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCheck_L: 0
   playerCheck_R: 0
-  range_radius: 39.7
+  wallCheck: 0
+  range_radius: 1e+9
   range_x: 0
   range_y: 0
   offset_y: 0
   hp: 50
   damage: 5
+  range_wall: 0
   playerCheck_circle: {fileID: 0}
   playerMask:
     serializedVersion: 2
     m_Bits: 64
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   playerTransform: {fileID: 0}
-  Speed: 50
+  Speed: 150
   status: 0
