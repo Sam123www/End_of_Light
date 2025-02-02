@@ -6,15 +6,19 @@ using UnityEngine.UI;
 public class player_UI : MonoBehaviour
 {
     public static player_UI playerUI;
+    [Header("hp, light")]
     public Text HPnum, lightnum;
     public float fullHP, fullLight, LightIncreaseSpeed, LightDecreaseSpeed;
     public Slider HP, Light;
     bool isIncreasing;
+    [Header("textTrigger")]
+    public string[] text;
     void Start()
     {
         if (playerUI == null) { playerUI = this; }
-        HP.value = 1;
+        HP.value = GameManager.instance.player_hp;
         HPnum.text = fullHP.ToString();
+        Light.value = GameManager.instance.player_light;
         lightnum.text = fullLight.ToString();
         StartCoroutine(decreaseLight());
         StartCoroutine(increaseLight());
@@ -61,5 +65,9 @@ public class player_UI : MonoBehaviour
         }
         StartCoroutine(increaseLight());
         yield return null;
+    }
+    public void Transmit()
+    {
+        GetComponent<Animator>().Play("transmit");
     }
 }

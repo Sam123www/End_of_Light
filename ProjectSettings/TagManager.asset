@@ -56,3 +56,6 @@ TagManager:
   - name: ForeEnemy
     uniqueID: 2795873599
     locked: 0
+  - name: Text
+    uniqueID: 1147715629
+    locked: 0
