@@ -9,19 +9,31 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class Door : MonoBehaviour
 {
     public GameObject[] door;
+    public GameObject openKey;
     public Sprite open;
     public int nextScene;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && Input.GetAxis("Vertical") > 0.1f)
-        {   
-            foreach (var item in door)
+        if (collision.CompareTag("Player"))
+        {
+            openKey.SetActive(true);
+            if (Input.GetAxis("Vertical") > 0.1f)
             {
-                item.gameObject.GetComponent<SpriteRenderer>().sprite = open;
+                foreach (var item in door)
+                {
+                    item.gameObject.GetComponent<SpriteRenderer>().sprite = open;
+                }
+                StartCoroutine(Transmit());
+                Time.timeScale = 0;
             }
-            StartCoroutine(Transmit());
-            Time.timeScale = 0;
         } 
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            openKey.SetActive(false);
+        }
     }
 
     IEnumerator Transmit()
