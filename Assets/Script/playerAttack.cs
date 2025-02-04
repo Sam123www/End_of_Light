@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -12,7 +13,7 @@ public class playerAttack : MonoBehaviour
     public float hurtSpeed_x, hurtSpeed_y;
     public float lightRange, attackRange;
     public float damage;
-    public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer;
+    public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer, groundLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -77,7 +78,10 @@ public class playerAttack : MonoBehaviour
         {
             foreach(Collider2D collider in lightCheckGhost)
             {
-                collider.gameObject.SendMessage("Avoid");
+                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer)){
+                    
+                    collider.gameObject.SendMessage("Avoid");
+                }
             }
         }
         Collider2D[] lightCheckTomb = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, tombLayer);
@@ -85,7 +89,10 @@ public class playerAttack : MonoBehaviour
         {
             foreach (Collider2D collider in lightCheckTomb)
             {
-                collider.gameObject.SendMessage("Enable");
+                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer))
+                {
+                    collider.gameObject.SendMessage("Enable");
+                }
             }
         }
         Collider2D[] lightCheckTrap = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, trapLayer);
@@ -93,7 +100,10 @@ public class playerAttack : MonoBehaviour
         {
             foreach (Collider2D collider in lightCheckTrap)
             {
-                collider.gameObject.SendMessage("Enable");
+                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer))
+                {
+                    collider.gameObject.SendMessage("Enable");
+                }
             }
         }
     }

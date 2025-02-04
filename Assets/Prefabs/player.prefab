@@ -293,8 +293,8 @@ MonoBehaviour:
   m_Color: {r: 0.8726415, g: 0.90403885, b: 1, a: 1}
   m_Intensity: 0.1
   m_LightVolumeIntensity: 0.15
-  m_LightVolumeIntensityEnabled: 1
-  m_ApplyToSortingLayers: f1a57d9000000000811396ad877b2fea3fa5a5a62dc06844
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: f1a57d9000000000811396ad2dc06844
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -312,7 +312,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 3.4
+  m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 37.58
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -624,6 +624,9 @@ MonoBehaviour:
   trapLayer:
     serializedVersion: 2
     m_Bits: 2048
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!50 &8278145006661630730
 Rigidbody2D:
   serializedVersion: 4
@@ -920,8 +923,8 @@ MonoBehaviour:
   m_Color: {r: 0.9356577, g: 0.9924528, b: 0.5973442, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 0.03
-  m_LightVolumeIntensityEnabled: 1
-  m_ApplyToSortingLayers: f1a57d9000000000811396ad877b2fea
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: f1a57d9000000000811396ad
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -930,8 +933,8 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
-  m_ShadowIntensity: 0
+  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensity: 1
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
