@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class playerAttack : MonoBehaviour
 {
     Rigidbody2D rb;
+    public GameObject hurt_effect;
     public Transform lightTrans, attackTrans;
     public float hurtSpeed_x, hurtSpeed_y;
     public float lightRange, attackRange;
@@ -30,6 +31,8 @@ public class playerAttack : MonoBehaviour
     public void reduceHp(float[] harm)
     {
         StartCoroutine(immuneFrame());
+        hurt_effect.SetActive(false);
+        hurt_effect.SetActive(true);
         if (harm[1] == 0)
         {
             rb.velocity = new Vector2(hurtSpeed_x, hurtSpeed_y);
