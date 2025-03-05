@@ -36,9 +36,9 @@ public class playerController : MonoBehaviour
     const string anim_takeOutLight = "TakeOutLight";
     const string anim_turnOffLight = "TurnOffLight";
     const string anim_attack = "Attack";
-    public bool isFalling, isAttacking;
+    public bool isFalling, isAttack, canChange = true;
     [Header("Attack")]
-    public float attackTime;
+    public float attack_cd, attackTime, attackTimer;
     void Awake()
     {
         if(player_controller == null)
@@ -80,7 +80,7 @@ public class playerController : MonoBehaviour
     }
     void ChangeAnimationState(string newState)
     {
-        if (currentState == newState || isAttacking) return;
+        if (currentState == newState || !canChange) return;
         anim.Play(newState);
         currentState = newState;
     }
@@ -96,12 +96,13 @@ public class playerController : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Fire1") && !isAttacking)
+            if (Input.GetButtonDown("Fire1") && attackTimer < Time.time)
             {
                 Debug.Log("attack!");
                 ChangeAnimationState(anim_attack);
-                isAttacking = true;
-                Invoke("AttackEnd", attackTime);
+                canChange = false;
+                attackTimer = Time.time + attack_cd;
+                StartCoroutine(AttackEnd());
             }
             else if (onGround)
             {
@@ -121,9 +122,10 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void AttackEnd()
+    IEnumerator AttackEnd()
     {
-        isAttacking = false;
+        yield return new WaitForSeconds(attackTime);
+        canChange = true;
     }
 
     public void takeOutLightEnd()
