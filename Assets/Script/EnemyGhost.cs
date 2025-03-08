@@ -30,11 +30,27 @@ public class EnemyGhost : Enemy
                 {
                     playerTransform = playerCheck_circle.transform;
                     transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, Speed*0.001f);
+                    if (playerTransform.position.x > transform.position.x)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 180, 0);
+                    }
+                    if (playerTransform.position.x < transform.position.x)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
                 }
                 break;
             case Status.avoid:
                 Invoke("Track", 2f);
                 transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, -Speed*0.003f);
+                if (playerTransform.position.x < transform.position.x)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+                if (playerTransform.position.x > transform.position.x)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
                 break;
         }
     }

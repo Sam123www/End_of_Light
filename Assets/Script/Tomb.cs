@@ -21,7 +21,7 @@ public class NewBehaviourScript : MonoBehaviour
             cd = Random.Range(cd_low, cd_high);
             timer = Time.time;
             count++;
-            Instantiate(skeleton, transform.position, Quaternion.identity);
+            Instantiate(skeleton, transform.position, Quaternion.identity).transform.SetParent(transform);
         }
     }
     

@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + offset_y, 0), new Vector3(range_x, range_y, 1));
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, new Vector2(range_wall, 1));
+        if(playerCheck_circle)
+            Gizmos.DrawLine(transform.position, playerCheck_circle.transform.position);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

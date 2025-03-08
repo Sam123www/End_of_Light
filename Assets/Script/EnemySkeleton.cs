@@ -5,7 +5,7 @@ using UnityEngine.Analytics;
 
 public class EnemySekelton : Enemy
 {
-    public bool isRight;
+    public bool isRight, rotating;
     public float Speed, hurtSpeed_x, hurtSpeed_y;
     public enum Status { idle, walk, track, dead, hurt };
     public Status status;
@@ -54,7 +54,31 @@ public class EnemySekelton : Enemy
                     status = Status.track;
                 break;
             case Status.track:
-                if (playerCheck_L)
+                if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
+                {
+                    changeDir();
+                    if (isRight)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 180, 0);
+                        rb.velocity = new Vector2(Speed, rb.velocity.y);
+                        if(playerCheck_circle.transform.position.x < transform.position.x && !rotating)
+                        {
+                            rotating = true;
+                            StartCoroutine(changeDir());
+                        }
+                    }
+                    else
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                        rb.velocity = new Vector2(-Speed, rb.velocity.y);
+                        if (playerCheck_circle.transform.position.x > transform.position.x && !rotating)
+                        {
+                            rotating = true;
+                            StartCoroutine(changeDir());
+                        }
+                    }
+                }
+                /*if (playerCheck_L)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     rb.velocity = new Vector2(-Speed, rb.velocity.y);
@@ -63,7 +87,7 @@ public class EnemySekelton : Enemy
                 {
                     transform.rotation = Quaternion.Euler(0, 180, 0);
                     rb.velocity = new Vector2(Speed, rb.velocity.y) ;
-                }
+                }*/
                 else
                 {
                     status = Status.idle;
@@ -76,6 +100,12 @@ public class EnemySekelton : Enemy
                 StartCoroutine(goDead());
                 break;
         }
+    }
+    IEnumerator changeDir()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isRight = !isRight;
+        rotating = false;
     }
     IEnumerator hurting()
     {

@@ -46,3 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_hp: 0
   player_light: 0
+  area_id: 0
+  area:
+  - {fileID: 0}
