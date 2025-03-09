@@ -5,14 +5,17 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
     Animator anim;
-    public float damage;
+    public float damage, hold;
     void Start()
     {
         anim = GetComponent<Animator>();
     }
-    public void Enable()
+     
+    public IEnumerator Enable()
     {
         anim.Play("enable");
+        yield return new WaitForSeconds(hold);
+        anim.Play("disable");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
