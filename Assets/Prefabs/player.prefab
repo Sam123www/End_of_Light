@@ -702,6 +702,8 @@ MonoBehaviour:
   lightRange: 4.59
   attackRange: 1.14
   damage: 10
+  immuneFlashTime: 0.1
+  immueFlashCount: 3
   ghostLayer:
     serializedVersion: 2
     m_Bits: 128

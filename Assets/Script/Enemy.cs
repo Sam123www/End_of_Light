@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         if(playerCheck_circle)
             Gizmos.DrawLine(transform.position, playerCheck_circle.transform.position);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && damage > 0)
         {

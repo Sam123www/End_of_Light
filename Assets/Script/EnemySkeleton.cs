@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.Rendering.Universal;
 
 public class EnemySekelton : Enemy
 {
-    public bool isRight, rotating;
+    public Light2D sk_light;
+    public float li_intensity;
+    public bool isRight, rotating, finding;
     public float Speed, hurtSpeed_x, hurtSpeed_y;
-    public enum Status { idle, walk, track, dead, hurt };
+    public enum Status {idle, track, dead, hurt, found};
     public Status status;
     [Header("Animation")]
     const string anim_idle = "Idle";
     const string anim_run = "Run";
     const string anim_death = "Death";
+    const string anim_found = "Found";
     string currentState;
     void Start()
     {
@@ -32,9 +36,10 @@ public class EnemySekelton : Enemy
     }
     private void FixedUpdate()
     {
-        switch(status)
+        switch (status)
         {
             case Status.idle:
+                sk_light.intensity = 0;
                 if (wallCheck)
                 {
                     wallCheck = false;
@@ -50,8 +55,15 @@ public class EnemySekelton : Enemy
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     rb.velocity = new Vector2(-Speed, rb.velocity.y);
                 }
-                if (playerCheck_L || playerCheck_R)
-                    status = Status.track;
+                if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
+                    status = Status.found;
+                break;
+            case Status.found:
+                if (!finding)
+                {
+                    StartCoroutine(transition());
+                    finding = true;
+                }
                 break;
             case Status.track:
                 if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
@@ -60,7 +72,7 @@ public class EnemySekelton : Enemy
                     if (isRight)
                     {
                         transform.rotation = Quaternion.Euler(0, 180, 0);
-                        rb.velocity = new Vector2(Speed, rb.velocity.y);
+                        rb.velocity = new Vector2(2*Speed, rb.velocity.y);
                         if(playerCheck_circle.transform.position.x < transform.position.x && !rotating)
                         {
                             rotating = true;
@@ -70,7 +82,7 @@ public class EnemySekelton : Enemy
                     else
                     {
                         transform.rotation = Quaternion.Euler(0, 0, 0);
-                        rb.velocity = new Vector2(-Speed, rb.velocity.y);
+                        rb.velocity = new Vector2(-2*Speed, rb.velocity.y);
                         if (playerCheck_circle.transform.position.x > transform.position.x && !rotating)
                         {
                             rotating = true;
@@ -78,16 +90,6 @@ public class EnemySekelton : Enemy
                         }
                     }
                 }
-                /*if (playerCheck_L)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                    rb.velocity = new Vector2(-Speed, rb.velocity.y);
-                }
-                else if (playerCheck_R)
-                {
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
-                    rb.velocity = new Vector2(Speed, rb.velocity.y) ;
-                }*/
                 else
                 {
                     status = Status.idle;
@@ -100,6 +102,22 @@ public class EnemySekelton : Enemy
                 StartCoroutine(goDead());
                 break;
         }
+    }
+    IEnumerator transition()
+    {
+        if (playerCheck_circle.transform.position.x < transform.position.x)
+        {
+            isRight = false;
+        }
+        else
+        {
+            isRight = true;
+        }
+        sk_light.intensity = li_intensity;
+        ChangeAnimationState(anim_found);
+        yield return new WaitForSeconds(0.5f);
+        finding = false;
+        status = Status.track;
     }
     IEnumerator changeDir()
     {
@@ -115,6 +133,7 @@ public class EnemySekelton : Enemy
     IEnumerator goDead()
     {
         damage = 0;
+        sk_light.intensity = 0;
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }

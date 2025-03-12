@@ -9,15 +9,20 @@ using UnityEngine.SceneManagement;
 public class playerAttack : MonoBehaviour
 {
     Rigidbody2D rb;
+    SpriteRenderer sr;
     public GameObject hurt_effect;
     public Transform lightTrans, attackTrans;
     public float hurtSpeed_x, hurtSpeed_y;
     public float lightRange, attackRange;
     public float damage;
+    bool immune = false;
+    public float immuneFlashTime;
+    public int immueFlashCount;
     public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer, groundLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -30,6 +35,7 @@ public class playerAttack : MonoBehaviour
     }
     public void reduceHp(float[] harm)
     {
+        if (immune) return;
         StartCoroutine(immuneFrame());
         hurt_effect.SetActive(false);
         hurt_effect.SetActive(true);
@@ -51,11 +57,19 @@ public class playerAttack : MonoBehaviour
     }
     IEnumerator immuneFrame()
     {
+        if (immune) yield return null;
         playerController.player_controller.canMove = false;
-        yield return new WaitForSeconds(0.5f);
+        immune = true;
+        for(int i=0; i<2*immueFlashCount; i++)
+        {
+            yield return new WaitForSeconds(immuneFlashTime);
+            sr.enabled = !sr.enabled;
+        }
         playerController.player_controller.canMove = true;
+        immune = false;
         yield return null;
     }
+
     public void Attack()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackTrans.position, attackRange, enemyLayer);

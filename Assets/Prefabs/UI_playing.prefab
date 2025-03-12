@@ -306,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPnum: {fileID: 2383347550212835130}
   lightnum: {fileID: 4439261019439128063}
-  fullHP: 50
+  fullHP: 25
   fullLight: 50
   LightIncreaseSpeed: 1
   LightDecreaseSpeed: 3

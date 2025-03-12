@@ -6,6 +6,7 @@ public class Trap : MonoBehaviour
 {
     Animator anim;
     public float damage, hold;
+    int count = 0;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -13,9 +14,13 @@ public class Trap : MonoBehaviour
      
     public IEnumerator Enable()
     {
+        count++;
         anim.Play("enable");
         yield return new WaitForSeconds(hold);
-        anim.Play("disable");
+        if(--count == 0)
+        {
+            anim.Play("disable");
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 0, g: 0.8886328, b: 1, a: 1}
-  m_Intensity: 0.66
+  m_Intensity: 0
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: f1a57d9000000000811396ad
@@ -149,7 +149,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   playerTransform: {fileID: 0}
+  sk_light: {fileID: 3845862835496144244}
+  li_intensity: 0.66
   isRight: 0
+  rotating: 0
   Speed: 2
   hurtSpeed_x: 5
   hurtSpeed_y: 5
