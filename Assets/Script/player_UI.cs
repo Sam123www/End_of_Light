@@ -8,7 +8,7 @@ public class player_UI : MonoBehaviour
     public static player_UI playerUI;
     [Header("hp, light")]
     public Text HPnum, lightnum;
-    public float fullHP, fullLight, LightIncreaseSpeed, LightDecreaseSpeed;
+    public float LightIncreaseSpeed, LightDecreaseSpeed;
     public Slider HP, Light;
     bool isIncreasing;
     [Header("textTrigger")]
@@ -16,28 +16,31 @@ public class player_UI : MonoBehaviour
     void Start()
     {
         if (playerUI == null) { playerUI = this; }
-        HP.value = GameManager.instance.player_hp;
-        HPnum.text = fullHP.ToString();
-        Light.value = GameManager.instance.player_light;
-        lightnum.text = fullLight.ToString();
+        HP.maxValue = GameManager.instance.player_fullHP;
+        HP.value = GameManager.instance.player_fullHP;
+        Light.maxValue = GameManager.instance.player_fullLight;
+        Light.value = GameManager.instance.player_fullLight;
         StartCoroutine(decreaseLight());
         StartCoroutine(increaseLight());
+    }
+    void Update()
+    {
+        lightnum.text = Light.value.ToString();
+        HPnum.text = HP.value.ToString();
     }
     IEnumerator decreaseLight()
     {
         yield return new WaitForSeconds(0.3f);
-        if (playerController.player_controller.Light.activeInHierarchy == true)
+        if (playerController.instance.Light.activeInHierarchy == true)
         {
             isIncreasing = false;
-            Light.value -= LightDecreaseSpeed / fullLight;
-            lightnum.text = (float.Parse(lightnum.text) - LightDecreaseSpeed).ToString();
+            Light.value -= LightDecreaseSpeed;
         }
-        if (Light.value <= 0)
+        if (Light.value <= 0 && playerController.instance.isLighting)
         {
-            playerController.player_controller.turnOffLight = true;
-            playerController.player_controller.isLighting = false;
+            playerController.instance.isLighting = false;
+            playerController.instance.turnOffLight = true;
             Light.value = 0;
-            lightnum.text = 0.ToString();
         }
         StartCoroutine(decreaseLight());
         yield return null;
@@ -52,16 +55,14 @@ public class player_UI : MonoBehaviour
         {
             yield return new WaitForSeconds(2);
         }
-        if(Light.value < 1 && playerController.player_controller.Light.activeInHierarchy == false)
+        if(Light.value < GameManager.instance.player_fullLight && playerController.instance.Light.activeInHierarchy == false)
         {
             isIncreasing = true;
-            Light.value += LightIncreaseSpeed / fullLight;
-            lightnum.text = (float.Parse(lightnum.text) + LightIncreaseSpeed).ToString();
+            Light.value += LightIncreaseSpeed;
         }
-        if(Light.value >= 1)
+        if(Light.value >= GameManager.instance.player_fullLight)
         {
-            lightnum.text = fullLight.ToString();
-            Light.value = 1;
+            Light.value = GameManager.instance.player_fullLight;
         }
         StartCoroutine(increaseLight());
         yield return null;

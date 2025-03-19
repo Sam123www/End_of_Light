@@ -47,9 +47,7 @@ public class playerAttack : MonoBehaviour
         {
             rb.velocity = new Vector2(-hurtSpeed_x, hurtSpeed_y);
         }
-        player_UI.playerUI.HP.value -= harm[0] / player_UI.playerUI.fullHP;
-        float now = float.Parse(player_UI.playerUI.HPnum.text);
-        player_UI.playerUI.HPnum.text = (now - harm[0]).ToString();
+        player_UI.playerUI.HP.value -= harm[0];
         if (player_UI.playerUI.HP.value <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -58,14 +56,19 @@ public class playerAttack : MonoBehaviour
     IEnumerator immuneFrame()
     {
         if (immune) yield return null;
-        playerController.player_controller.canMove = false;
+        playerController.instance.canMove = false;
         immune = true;
-        for(int i=0; i<2*immueFlashCount; i++)
+        for(int i = 0; i < immueFlashCount; i++)
         {
             yield return new WaitForSeconds(immuneFlashTime);
             sr.enabled = !sr.enabled;
         }
-        playerController.player_controller.canMove = true;
+        playerController.instance.canMove = true;
+        for (int i = 0; i < immueFlashCount; i++)
+        {
+            yield return new WaitForSeconds(immuneFlashTime);
+            sr.enabled = !sr.enabled;
+        }
         immune = false;
         yield return null;
     }
@@ -91,7 +94,7 @@ public class playerAttack : MonoBehaviour
     void Light()
     {
         Collider2D[] lightCheckGhost = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, ghostLayer);
-        if (lightCheckGhost != null && playerController.player_controller.Light.activeInHierarchy)
+        if (lightCheckGhost != null && playerController.instance.Light.activeInHierarchy)
         {
             foreach(Collider2D collider in lightCheckGhost)
             {
@@ -102,7 +105,7 @@ public class playerAttack : MonoBehaviour
             }
         }
         Collider2D[] lightCheckTomb = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, tombLayer);
-        if (lightCheckGhost != null && playerController.player_controller.Light.activeInHierarchy)
+        if (lightCheckGhost != null && playerController.instance.Light.activeInHierarchy)
         {
             foreach (Collider2D collider in lightCheckTomb)
             {
@@ -113,7 +116,7 @@ public class playerAttack : MonoBehaviour
             }
         }
         Collider2D[] lightCheckTrap = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, trapLayer);
-        if (lightCheckTrap != null && playerController.player_controller.Light.activeInHierarchy)
+        if (lightCheckTrap != null && playerController.instance.Light.activeInHierarchy)
         {
             foreach (Collider2D collider in lightCheckTrap)
             {

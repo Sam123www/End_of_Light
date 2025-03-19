@@ -7,7 +7,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    public static playerController player_controller;
+    public static playerController instance;
     public LayerMask playerLayer, groundLayer, oneWayGroundLayer;
     [Header("Light")]
     public bool takingOutLight, turnOffLight, isLighting;
@@ -41,9 +41,9 @@ public class playerController : MonoBehaviour
     public float attack_cd, attackTime, attackTimer;
     void Awake()
     {
-        if(player_controller == null)
+        if(instance == null)
         {
-            player_controller = this;
+            instance = this;
         }
     }
     void Start()

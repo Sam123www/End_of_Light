@@ -5,15 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public float player_hp, player_light;
+    public float player_fullHP, player_fullLight;
     public int area_id;
     public GameObject[] area;
     void Awake()
     {
         if(instance == null)
         {
-            player_light = 1;
-            player_hp = 1;
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
