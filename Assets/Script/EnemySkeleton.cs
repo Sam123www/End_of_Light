@@ -8,9 +8,9 @@ public class EnemySekelton : Enemy
 {
     public Light2D sk_light;
     public float li_intensity;
-    public bool isRight, rotating, finding;
+    public bool isRight, rotating, changing;
     public float Speed, hurtSpeed_x, hurtSpeed_y;
-    public enum Status {idle, track, dead, hurt, found};
+    public enum Status {walk, track, dead, hurt};
     public Status status;
     [Header("Animation")]
     const string anim_idle = "Idle";
@@ -20,13 +20,12 @@ public class EnemySekelton : Enemy
     string currentState;
     void Start()
     {
-        status = Status.idle;
+        status = Status.walk;
         StartCoroutine(wallChecking());
     }
     protected override void Update()
     {
         base.Update();
-        Animation();
     }
     IEnumerator wallChecking()
     {
@@ -38,7 +37,8 @@ public class EnemySekelton : Enemy
     {
         switch (status)
         {
-            case Status.idle:
+            case Status.walk:
+                ChangeAnimationState(anim_run);
                 sk_light.intensity = 0;
                 if (wallCheck)
                 {
@@ -56,18 +56,24 @@ public class EnemySekelton : Enemy
                     rb.velocity = new Vector2(-Speed, rb.velocity.y);
                 }
                 if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
-                    status = Status.found;
-                break;
-            case Status.found:
-                if (!finding)
                 {
-                    StartCoroutine(transition());
-                    finding = true;
+                    sk_light.intensity = li_intensity;
+                    if (playerCheck_circle.transform.position.x < transform.position.x)
+                    {
+                        isRight = false;
+                    }
+                    else
+                    {
+                        isRight = true;
+                    }
+                    ChangeAnimationState(anim_idle);
+                    StartCoroutine(ChangeStatus(0.5f, Status.track));
                 }
                 break;
             case Status.track:
                 if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
                 {
+                    anim.speed = 2;
                     changeDir();
                     if (isRight)
                     {
@@ -92,32 +98,25 @@ public class EnemySekelton : Enemy
                 }
                 else
                 {
-                    status = Status.idle;
+                    anim.speed = 1;
+                    StartCoroutine(ChangeStatus(0.5f, Status.walk));
                 }
                 break;
             case Status.hurt:
                 StartCoroutine(hurting());
                 break;
             case Status.dead:
-                StartCoroutine(goDead());
+                StartCoroutine(toDead());
                 break;
         }
     }
-    IEnumerator transition()
+    IEnumerator ChangeStatus(float waitTime, Status sta)
     {
-        if (playerCheck_circle.transform.position.x < transform.position.x)
-        {
-            isRight = false;
-        }
-        else
-        {
-            isRight = true;
-        }
-        sk_light.intensity = li_intensity;
-        ChangeAnimationState(anim_found);
-        yield return new WaitForSeconds(0.5f);
-        finding = false;
-        status = Status.track;
+        if (changing) yield return null;
+        changing = true;
+        yield return new WaitForSeconds(waitTime);
+        status = sta;
+        changing = false;
     }
     IEnumerator changeDir()
     {
@@ -128,9 +127,9 @@ public class EnemySekelton : Enemy
     IEnumerator hurting()
     {
         yield return new WaitForSeconds(0.5f);
-        status = Status.idle;
+        status = Status.walk;
     }
-    IEnumerator goDead()
+    IEnumerator toDead()
     {
         damage = 0;
         sk_light.intensity = 0;
@@ -142,18 +141,6 @@ public class EnemySekelton : Enemy
         if (currentState == newState) return;
         anim.Play(newState);
         currentState = newState;
-    }
-    void Animation()
-    {
-        if (status != Status.idle && status != Status.track) return;
-        if(Mathf.Abs(rb.velocity.x) > 0.1)
-        {
-            ChangeAnimationState(anim_run);
-        }
-        else
-        {
-            ChangeAnimationState(anim_idle);
-        }
     }
     public void onDamage(float[] damage)
     {

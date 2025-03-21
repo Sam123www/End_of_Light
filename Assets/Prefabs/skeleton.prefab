@@ -134,7 +134,7 @@ MonoBehaviour:
   playerCheck_L: 0
   playerCheck_R: 0
   wallCheck: 0
-  range_radius: 12.46
+  range_radius: 18
   range_x: 13.1
   range_y: 3
   offset_y: 0.88
@@ -153,6 +153,7 @@ MonoBehaviour:
   li_intensity: 0.66
   isRight: 0
   rotating: 0
+  finding: 0
   Speed: 2
   hurtSpeed_x: 5
   hurtSpeed_y: 5
