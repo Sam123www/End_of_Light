@@ -303,7 +303,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 1
+  m_ShadowIntensityEnabled: 0
   m_ShadowIntensity: 1
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -425,7 +425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8596281794300019160
 Transform:
   m_ObjectHideFlags: 0
@@ -719,6 +719,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  transferLightLayer:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!50 &8278145006661630730
 Rigidbody2D:
   serializedVersion: 4
@@ -1324,7 +1327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8918078422140185214}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.9976598, w: -0.06837424}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9988268, w: 0.04842646}
   m_LocalPosition: {x: 0.090185925, y: 0.022442205, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1332,7 +1335,7 @@ Transform:
   - {fileID: 8596281794300019160}
   - {fileID: 8843141544329653151}
   m_Father: {fileID: 8046542849545917315}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -187.841}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 174.449}
 --- !u!1 &9028343210701106950
 GameObject:
   m_ObjectHideFlags: 0

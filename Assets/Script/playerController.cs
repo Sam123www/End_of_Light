@@ -13,7 +13,6 @@ public class playerController : MonoBehaviour
     public bool takingOutLight, turnOffLight, isLighting;
     public GameObject Light;
     [Header("collision")]
-    Collider2D coll;
     Collider2D onOneWayGroundTop, onOneWayGroundBottom;
     public bool onGround, onGroundEnter;
     public float check_x_size, check_y_size, check_offset_down, check_offset_top;
@@ -48,7 +47,6 @@ public class playerController : MonoBehaviour
     }
     void Start()
     {
-        coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         jumpTimes = jumpMaxTimes;

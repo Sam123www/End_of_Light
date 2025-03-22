@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class playerAttack : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class playerAttack : MonoBehaviour
     bool immune = false;
     public float immuneFlashTime;
     public int immueFlashCount;
-    public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer, groundLayer;
+    public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer, groundLayer, transferLightLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -91,9 +93,27 @@ public class playerAttack : MonoBehaviour
             }
         }
     }
+    void SendMes(LayerMask layer, string message)
+    {
+        Collider2D[] lightCheck = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, layer);
+        if (lightCheck != null && playerController.instance.Light.activeInHierarchy)
+        {
+            foreach (Collider2D collider in lightCheck)
+            {
+                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer))
+                {
+                    collider.gameObject.SendMessage(message);
+                }
+            }
+        }
+    }
     void Light()
     {
-        Collider2D[] lightCheckGhost = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, ghostLayer);
+        SendMes(ghostLayer, "Avoid");
+        SendMes(tombLayer, "Enable");
+        SendMes(trapLayer, "Enable");
+        SendMes(transferLightLayer, "Enable");
+        /*Collider2D[] lightCheckGhost = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, ghostLayer);
         if (lightCheckGhost != null && playerController.instance.Light.activeInHierarchy)
         {
             foreach(Collider2D collider in lightCheckGhost)
@@ -125,6 +145,6 @@ public class playerAttack : MonoBehaviour
                     collider.gameObject.SendMessage("Enable");
                 }
             }
-        }
+        }*/
     }
 }
