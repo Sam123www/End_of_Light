@@ -10,13 +10,12 @@ public class EnemySekelton : Enemy
     public float li_intensity;
     public bool isRight, rotating, changing;
     public float Speed, hurtSpeed_x, hurtSpeed_y;
-    public enum Status {walk, track, dead, hurt};
+    public enum Status {idle, walk, track, dead, hurt};
     public Status status;
     [Header("Animation")]
     const string anim_idle = "Idle";
     const string anim_run = "Run";
     const string anim_death = "Death";
-    const string anim_found = "Found";
     string currentState;
     void Start()
     {
@@ -37,6 +36,8 @@ public class EnemySekelton : Enemy
     {
         switch (status)
         {
+            case Status.idle:
+                break;
             case Status.walk:
                 ChangeAnimationState(anim_run);
                 sk_light.intensity = 0;
@@ -61,16 +62,20 @@ public class EnemySekelton : Enemy
                     if (playerCheck_circle.transform.position.x < transform.position.x)
                     {
                         isRight = false;
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
                     }
                     else
                     {
                         isRight = true;
+                        transform.rotation = Quaternion.Euler(0, 180, 0);
                     }
+                    status = Status.idle;
                     ChangeAnimationState(anim_idle);
                     StartCoroutine(ChangeStatus(0.5f, Status.track));
                 }
                 break;
             case Status.track:
+                ChangeAnimationState(anim_run);
                 if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
                 {
                     anim.speed = 2;
@@ -103,10 +108,10 @@ public class EnemySekelton : Enemy
                 }
                 break;
             case Status.hurt:
-                StartCoroutine(hurting());
+                status = Status.idle;
+                StartCoroutine(ChangeStatus(0.5f, Status.track));
                 break;
             case Status.dead:
-                StartCoroutine(toDead());
                 break;
         }
     }
@@ -124,13 +129,10 @@ public class EnemySekelton : Enemy
         isRight = !isRight;
         rotating = false;
     }
-    IEnumerator hurting()
-    {
-        yield return new WaitForSeconds(0.5f);
-        status = Status.walk;
-    }
     IEnumerator toDead()
     {
+        status = Status.dead;
+        ChangeAnimationState(anim_death);
         damage = 0;
         sk_light.intensity = 0;
         yield return new WaitForSeconds(3f);
@@ -144,6 +146,7 @@ public class EnemySekelton : Enemy
     }
     public void onDamage(float[] damage)
     {
+        if(status == Status.dead) return;
         status = Status.hurt;
         if (damage[1] == 0)
         {
@@ -156,9 +159,7 @@ public class EnemySekelton : Enemy
         hp -= damage[0];
         if (hp <= 0)
         {
-            ChangeAnimationState(anim_death);
-            status = Status.dead;
+            StartCoroutine(toDead());
         }
-        Debug.Log(hp);
     }
 }

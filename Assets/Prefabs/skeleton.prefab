@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3840406821491596789}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.122, y: 0.067, z: 0}
+  m_LocalPosition: {x: 0.122, y: 0.072, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,10 +150,10 @@ MonoBehaviour:
     m_Bits: 8
   playerTransform: {fileID: 0}
   sk_light: {fileID: 3845862835496144244}
-  li_intensity: 0.66
+  li_intensity: 0.4
   isRight: 0
   rotating: 0
-  finding: 0
+  changing: 0
   Speed: 2
   hurtSpeed_x: 5
   hurtSpeed_y: 5

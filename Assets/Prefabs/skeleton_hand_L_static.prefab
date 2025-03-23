@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8023267529801673727}
   - component: {fileID: 4882378249211911562}
   - component: {fileID: 3910662712642914118}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: skeleton_hand_L_static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092543609103791462}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.6721924, w: 0.74037653}
+  m_LocalRotation: {x: 0, y: 0, z: -0.6721924, w: 0.74037653}
   m_LocalPosition: {x: 50.866, y: -17.653, z: 0}
   m_LocalScale: {x: 2.4999998, y: 2.4999998, z: 2.5}
   m_ConstrainProportionsScale: 1
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4297108322062201212}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2674324424075309482}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1327315412005613407}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    
     public SceneAsset playScene, settingScene, aboutAsScene;
+
     public void playBotton()
     {
         SceneManager.LoadScene(playScene.name);

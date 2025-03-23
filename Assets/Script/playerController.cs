@@ -96,8 +96,8 @@ public class playerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") && attackTimer < Time.time)
             {
-                Debug.Log("attack!");
                 ChangeAnimationState(anim_attack);
+                canMove = false;
                 canChange = false;
                 attackTimer = Time.time + attack_cd;
                 StartCoroutine(AttackEnd());
@@ -123,6 +123,7 @@ public class playerController : MonoBehaviour
     IEnumerator AttackEnd()
     {
         yield return new WaitForSeconds(attackTime);
+        canMove = true;
         canChange = true;
     }
 

@@ -7,6 +7,7 @@ using UnityEngine.UIElements.Experimental;
 
 public class TransferLight : MonoBehaviour
 {
+    public GameObject[] lightLine;
     Animator anim;
     Collider2D[] lightcol;
     public Light2D myLight;
@@ -31,6 +32,13 @@ public class TransferLight : MonoBehaviour
     {
         lightcol = Physics2D.OverlapCircleAll(transform.position, radius, lightLayer);
         anim.Play("enable");
+        if (lightLine.Length > 0)
+        {
+            foreach (GameObject obj in lightLine)
+            {
+                obj.gameObject.SendMessage("Enable");
+            }
+        }
         yield return new WaitForSeconds(delayTime);
         foreach (Collider2D col in lightcol)
         {

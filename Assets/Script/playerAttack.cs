@@ -80,7 +80,6 @@ public class playerAttack : MonoBehaviour
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackTrans.position, attackRange, enemyLayer);
         foreach(Collider2D collider in detectedObjects)
         {
-            Debug.Log(collider.gameObject.name);
             if(collider.transform.position.x > transform.position.x)
             {
                 float[] data = { damage, 0 };
@@ -113,38 +112,5 @@ public class playerAttack : MonoBehaviour
         SendMes(tombLayer, "Enable");
         SendMes(trapLayer, "Enable");
         SendMes(transferLightLayer, "Enable");
-        /*Collider2D[] lightCheckGhost = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, ghostLayer);
-        if (lightCheckGhost != null && playerController.instance.Light.activeInHierarchy)
-        {
-            foreach(Collider2D collider in lightCheckGhost)
-            {
-                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer)){
-                    
-                    collider.gameObject.SendMessage("Avoid");
-                }
-            }
-        }
-        Collider2D[] lightCheckTomb = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, tombLayer);
-        if (lightCheckGhost != null && playerController.instance.Light.activeInHierarchy)
-        {
-            foreach (Collider2D collider in lightCheckTomb)
-            {
-                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer))
-                {
-                    collider.gameObject.SendMessage("Enable");
-                }
-            }
-        }
-        Collider2D[] lightCheckTrap = Physics2D.OverlapCircleAll(lightTrans.position, lightRange, trapLayer);
-        if (lightCheckTrap != null && playerController.instance.Light.activeInHierarchy)
-        {
-            foreach (Collider2D collider in lightCheckTrap)
-            {
-                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer))
-                {
-                    collider.gameObject.SendMessage("Enable");
-                }
-            }
-        }*/
     }
 }
