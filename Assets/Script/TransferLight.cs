@@ -7,13 +7,13 @@ using UnityEngine.UIElements.Experimental;
 
 public class TransferLight : MonoBehaviour
 {
-    public GameObject[] lightLine;
+    public GameObject[] PriorityObj, LowPriorityObj;
     Animator anim;
     Collider2D[] lightcol;
     public Light2D myLight;
     public float radius, delayTime;
     bool isEnable;
-    public LayerMask lightLayer;
+    public LayerMask lightLayer, groundLayer, trapLayer;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -22,27 +22,52 @@ public class TransferLight : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+    
     public void Enable()
     {
         if (isEnable) return;
         isEnable = true;
         StartCoroutine(toEnable());
     }
+    void SendMes(LayerMask layer, string message)
+    {
+        lightcol = Physics2D.OverlapCircleAll(transform.position, radius, layer);
+        if (lightcol != null)
+        {
+            foreach (Collider2D collider in lightcol)
+            {
+                if (!Physics2D.Linecast(transform.position, collider.transform.position, groundLayer))
+                {
+                    collider.gameObject.SendMessage(message);
+                }
+            }
+        }
+    }
+    private void Update()
+    {
+        if (isEnable)
+        {
+            SendMes(trapLayer, "Enable");
+        }
+    }
     IEnumerator toEnable()
     {
-        lightcol = Physics2D.OverlapCircleAll(transform.position, radius, lightLayer);
         anim.Play("enable");
-        if (lightLine.Length > 0)
+        if (PriorityObj.Length > 0)
         {
-            foreach (GameObject obj in lightLine)
+            foreach (GameObject obj in PriorityObj)
             {
                 obj.gameObject.SendMessage("Enable");
             }
         }
         yield return new WaitForSeconds(delayTime);
-        foreach (Collider2D col in lightcol)
+        if (LowPriorityObj.Length > 0)
         {
-            col.gameObject.SendMessage("Enable");
+            foreach (GameObject obj in LowPriorityObj)
+            {
+                obj.gameObject.SendMessage("Enable");
+            }
         }
+        SendMes(lightLayer, "Enable");
     }
 }

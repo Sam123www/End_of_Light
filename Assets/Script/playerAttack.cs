@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,6 +13,7 @@ public class playerAttack : MonoBehaviour
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
+    CinemachineImpulseSource cis;
     public GameObject hurt_effect;
     public Transform lightTrans, attackTrans;
     public float hurtSpeed_x, hurtSpeed_y;
@@ -21,8 +23,11 @@ public class playerAttack : MonoBehaviour
     public float immuneFlashTime;
     public int immueFlashCount;
     public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer, groundLayer, transferLightLayer;
+    [Header("CameraShake")]
+    public float hurtShakeForce;
     void Start()
     {
+        cis = GetComponent<CinemachineImpulseSource>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
     }
@@ -38,6 +43,7 @@ public class playerAttack : MonoBehaviour
     public void reduceHp(float[] harm)
     {
         if (immune) return;
+        cis.GenerateImpulse(hurtShakeForce);
         StartCoroutine(immuneFrame());
         hurt_effect.SetActive(false);
         hurt_effect.SetActive(true);
