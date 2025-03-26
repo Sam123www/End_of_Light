@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    
     public SceneAsset playScene, settingScene, aboutAsScene;
+    public UnityEvent onSelected;
 
+    private void Start()
+    {
+        onSelected.Invoke();
+    }
     public void playBotton()
     {
-        SceneManager.LoadScene(playScene.name);
+        GameManager.instance.Loading(playScene.name);
     }
     public void settingBotton()
     {

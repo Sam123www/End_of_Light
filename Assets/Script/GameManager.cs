@@ -1,39 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public GameObject UIPrefab;
     public float player_fullHP, player_fullLight;
-    public int area_id;
-    public GameObject[] area;
     void Awake()
     {
         if(instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            UIPrefab = Instantiate(UIPrefab);
+            DontDestroyOnLoad(UIPrefab);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
-    public void ChangeArea(int nowId)
+    public void Loading(string nextScene)
     {
-        for(int i=0; i<area.Length; i++)
-        {
-            if (nowId == i)
-            {
-                foreach (GameObject child in area[i].GetComponentsInChildren<GameObject>())
-                {
-                    child.SetActive(true);
-                }
-            }
-            else
-            {
-                foreach (GameObject child in area[i].GetComponentsInChildren<GameObject>())
-                {
-                    child.SetActive(false);
-                }
-            }
-        }
+        UIPrefab.SendMessage("Enable", nextScene);
     }
 }

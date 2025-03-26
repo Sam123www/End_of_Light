@@ -10,14 +10,17 @@ using UnityEngine.UIElements;
 public class Loading : MonoBehaviour
 {
     float rotZ;
-    public SceneAsset sceneName;
     public GameObject shoevl;
     Animator anim;
-    void Start()
+    bool isLoading;
+
+    public void Enable(string nextScene)
     {
-        StartCoroutine(LoadingScreen());
+        if(isLoading) return;
+        isLoading = true;
         anim = GetComponent<Animator>();
         anim.Play("Loading");
+        StartCoroutine(LoadingScreen(nextScene));
     }
     private void FixedUpdate()
     {
@@ -27,9 +30,9 @@ public class Loading : MonoBehaviour
             shoevl.transform.rotation = Quaternion.Euler(0, 0, rotZ);
         }
     }
-    IEnumerator LoadingScreen()
+    IEnumerator LoadingScreen(string nextScene)
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName.name);
+        AsyncOperation async = SceneManager.LoadSceneAsync(nextScene);
         async.allowSceneActivation = false;
         yield return new WaitForSeconds(3);
         while (async.progress < 0.9f)
@@ -37,10 +40,12 @@ public class Loading : MonoBehaviour
             yield return null;
         }
         async.allowSceneActivation = true;
+        shoevl.SetActive(false);
+        anim.Play("LoadEnd");
+        isLoading = false;
     }
     public void LoadingAnimation()
     {
-
         shoevl.SetActive(true);
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Enemy
   - oneWayGround
+  - BossDoor
   layers:
   - Default
   - TransparentFX

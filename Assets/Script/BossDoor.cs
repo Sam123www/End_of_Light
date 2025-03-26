@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class BossDoor : MonoBehaviour
 {
-    public string path;
+    public SceneAsset nextScene;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene(path);
+            GameManager.instance.Loading(nextScene.name);
         }
     }
 }

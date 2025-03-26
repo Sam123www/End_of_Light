@@ -44,10 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8988bd845c0e64186ccfa102b21f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_hp: 0
-  player_light: 0
+  UIPrefab: {fileID: 4251845738533536917, guid: 7b9b140c023d5d244bc34561412b1f6a, type: 3}
   player_fullHP: 25
   player_fullLight: 50
-  area_id: 0
-  area:
-  - {fileID: 0}

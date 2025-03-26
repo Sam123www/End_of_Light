@@ -35,7 +35,7 @@ public class playerController : MonoBehaviour
     const string anim_takeOutLight = "TakeOutLight";
     const string anim_turnOffLight = "TurnOffLight";
     const string anim_attack = "Attack";
-    public bool isFalling, isAttack, canChange = true;
+    public bool isFalling, isAttack, canChangeAnim = true;
     [Header("Attack")]
     public float attack_cd, attackTime, attackTimer;
     void Awake()
@@ -53,12 +53,12 @@ public class playerController : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !takingOutLight && !isLighting && float.Parse(player_UI.playerUI.lightnum.text) > 0)
+        if (Input.GetButtonDown("Light") && !takingOutLight && !isLighting && float.Parse(player_UI.playerUI.lightnum.text) > 0)
         {
             takingOutLight = true;
             isLighting = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && !turnOffLight && isLighting)
+        else if (Input.GetButtonDown("Light") && !turnOffLight && isLighting)
         {
             turnOffLight = true;
             isLighting = false;
@@ -78,7 +78,7 @@ public class playerController : MonoBehaviour
     }
     void ChangeAnimationState(string newState)
     {
-        if (currentState == newState || !canChange) return;
+        if (currentState == newState || !canChangeAnim) return;
         anim.Play(newState);
         currentState = newState;
     }
@@ -98,7 +98,7 @@ public class playerController : MonoBehaviour
             {
                 ChangeAnimationState(anim_attack);
                 canMove = false;
-                canChange = false;
+                canChangeAnim = false;
                 attackTimer = Time.time + attack_cd;
                 StartCoroutine(AttackEnd());
             }
@@ -124,7 +124,7 @@ public class playerController : MonoBehaviour
     {
         yield return new WaitForSeconds(attackTime);
         canMove = true;
-        canChange = true;
+        canChangeAnim = true;
     }
 
     public void takeOutLightEnd()
@@ -225,6 +225,23 @@ public class playerController : MonoBehaviour
         {
             onOneWayGroundTop.usedByEffector = true;
             Physics2D.IgnoreLayerCollision(6, 12, false);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("BossDoor"))
+        {
+            canMove = false;
+            canChangeAnim = false;
+            ChangeAnimationState(anim_run);
+            if(transform.position.x < collision.transform.position.x)
+            {
+                rb.velocity = Vector2.right * Speed;
+            }
+            else
+            {
+                rb.velocity = Vector2.left * Speed;
+            }
         }
     }
 }
