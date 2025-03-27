@@ -7,15 +7,17 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject lightMouse;
     public SceneAsset playScene, settingScene, aboutAsScene;
-    public UnityEvent onSelected;
-
-    private void Start()
+    private void Update()
     {
-        onSelected.Invoke();
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        pos.z = 0;
+        lightMouse.transform.position = pos;
     }
     public void playBotton()
     {

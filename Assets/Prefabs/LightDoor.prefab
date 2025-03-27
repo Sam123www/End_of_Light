@@ -101,8 +101,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 208.64
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 7.895744
+  m_PointLightInnerRadius: 6
+  m_PointLightOuterRadius: 7
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 6394373858121264457}
   - component: {fileID: 2471072167219899310}
   m_Layer: 11
-  m_Name: lantern_3
+  m_Name: lantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
