@@ -29,6 +29,11 @@ public class TransferLight : MonoBehaviour
         isEnable = true;
         StartCoroutine(toEnable());
     }
+    public void Disable()
+    {
+        isEnable = false;
+        anim.Play("idle");
+    }
     void SendMes(LayerMask layer, string message)
     {
         lightcol = Physics2D.OverlapCircleAll(transform.position, radius, layer);

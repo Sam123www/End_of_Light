@@ -6,18 +6,35 @@ using UnityEngine.PlayerLoop;
 public class Elevator : MonoBehaviour
 {
     public float speed;
-    public Transform endPoint;
+    public Transform upPoint, downPoint;
+    bool toUp = true;
+    public GameObject lightObj;
     Rigidbody2D rb;
     public void Enable()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.up * speed;
+        if (toUp)
+        {
+            rb.velocity = Vector2.up * speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.down * speed;
+        }
     }
     private void FixedUpdate()
     {
-        if (transform.position.y >= endPoint.position.y)
+        if (toUp && transform.position.y >= upPoint.position.y)
         {
+            toUp = false;
             rb.velocity = Vector2.zero;
+            lightObj.SendMessage("Disable");
+        }
+        if(!toUp && transform.position.y <= downPoint.position.y)
+        {
+            toUp = true;
+            rb.velocity = Vector2.zero;
+            lightObj.SendMessage("Disable");
         }
     }
 }
