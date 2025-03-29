@@ -114,12 +114,11 @@ public class playerController : MonoBehaviour
             {
                 if (rb.velocity.y < -0.1)
                     ChangeAnimationState(anim_fall);
-                else if (rb.velocity.y > 0.1)
+                else if (rb.velocity.y > 0.1 && Input.GetButton("Jump"))
                     ChangeAnimationState(anim_jump);
             }
         }
     }
-
     IEnumerator AttackEnd()
     {
         yield return new WaitForSeconds(attackTime);
@@ -173,6 +172,7 @@ public class playerController : MonoBehaviour
     {
         if (onGround && !onGroundEnter)
         {
+            AudioManager.PlayFallToGroundAudio();
             isFalling = false;
             jumpTimes = jumpMaxTimes;
             onGroundEnter = true;
@@ -183,7 +183,7 @@ public class playerController : MonoBehaviour
             onGroundEnter = false;
         }
         jumpHold = Input.GetButton("Jump");
-        if (Input.GetButtonDown("Jump") && jumpTimes > 0 && (!onOneWayGroundBottom || Input.GetAxis("Vertical") >= 0))
+        if (Input.GetButtonDown("Jump") && jumpTimes > 0 && (!onOneWayGroundBottom || Input.GetAxis("Vertical") >= -0.5f))
         {
             jumpPressing = true;
         }
@@ -216,7 +216,7 @@ public class playerController : MonoBehaviour
     }
     void oneWayGroundCheck()
     {
-        if(onOneWayGroundBottom && Input.GetAxis("Vertical") < 0 && Input.GetButton("Jump"))
+        if(onOneWayGroundBottom && Input.GetAxis("Vertical") < -0.5f && Input.GetButton("Jump"))
         {
             onOneWayGroundBottom.usedByEffector = false;
             Physics2D.IgnoreLayerCollision(6, 12, true);

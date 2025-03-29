@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -24,7 +25,7 @@ public class playerAttack : MonoBehaviour
     public int immueFlashCount;
     public LayerMask ghostLayer, enemyLayer, tombLayer, trapLayer, groundLayer, transferLightLayer;
     [Header("CameraShake")]
-    public float hurtShakeForce;
+    public float hurtShakeForce, attackShakeForce;
     void Start()
     {
         cis = GetComponent<CinemachineImpulseSource>();
@@ -43,7 +44,8 @@ public class playerAttack : MonoBehaviour
     public void reduceHp(float[] harm)
     {
         if (immune) return;
-        cis.GenerateImpulse(hurtShakeForce);
+        AudioManager.PlayHurtAudio();
+        cis.GenerateImpulse(new Vector3(hurtShakeForce, 1, 0).normalized);
         StartCoroutine(immuneFrame());
         hurt_effect.SetActive(false);
         hurt_effect.SetActive(true);
@@ -58,8 +60,16 @@ public class playerAttack : MonoBehaviour
         player_UI.playerUI.HP.value -= harm[0];
         if (player_UI.playerUI.HP.value <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StartCoroutine(Dying());
         }
+    }
+    IEnumerator Dying()
+    {
+        Time.timeScale = 0;
+        AudioManager.MuteAll();
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 1;
+        GameManager.instance.SendMessage("Loading", SceneManager.GetActiveScene().name);
     }
     IEnumerator immuneFrame()
     {
@@ -84,17 +94,29 @@ public class playerAttack : MonoBehaviour
     public void Attack()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackTrans.position, attackRange, enemyLayer);
-        foreach(Collider2D collider in detectedObjects)
+        if(detectedObjects.Length > 0)
         {
-            if(collider.transform.position.x > transform.position.x)
+            AudioManager.PlayHurtEnemyAudio();
+            if (transform.rotation.y == 0)
             {
-                float[] data = { damage, 0 };
-                collider.gameObject.SendMessage("onDamage", data);
+                cis.GenerateImpulse(Vector3.left * attackShakeForce);
             }
             else
             {
-                float[] data = { damage, 1 };
-                collider.gameObject.SendMessage("onDamage", data);
+                cis.GenerateImpulse(Vector3.right * attackShakeForce);
+            }
+            foreach (Collider2D collider in detectedObjects)
+            {
+                if (collider.transform.position.x > transform.position.x)
+                {
+                    float[] data = { damage, 0 };
+                    collider.gameObject.SendMessage("onDamage", data);
+                }
+                else
+                {
+                    float[] data = { damage, 1 };
+                    collider.gameObject.SendMessage("onDamage", data);
+                }
             }
         }
     }

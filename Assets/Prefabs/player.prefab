@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 4446076655071220528}
   - component: {fileID: 6536023163427953619}
   - component: {fileID: 2251272233854636535}
+  - component: {fileID: 2413948888460624422}
   - component: {fileID: 8278145006661630730}
   - component: {fileID: 4717985322736471195}
   - component: {fileID: 3130565625925530431}
@@ -679,7 +680,7 @@ MonoBehaviour:
   jumpForceHold: 0.6
   isFalling: 0
   isAttack: 0
-  canChange: 1
+  canChangeAnim: 1
   attack_cd: 0.4
   attackTime: 0.2
   attackTimer: 0
@@ -723,7 +724,20 @@ MonoBehaviour:
   transferLightLayer:
     serializedVersion: 2
     m_Bits: 16384
-  hurtShakeForce: 0
+  hurtShakeForce: 1
+  attackShakeForce: 0.5
+--- !u!114 &2413948888460624422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3489944109017981374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e987d6aac66e12b4789e3d79c1ea8350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &8278145006661630730
 Rigidbody2D:
   serializedVersion: 4

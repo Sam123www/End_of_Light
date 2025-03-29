@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2775340649334544018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6948807315829393256}
+  - component: {fileID: 4752391570278056286}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6948807315829393256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2775340649334544018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 60.56952, y: -45.055206, z: 1.6498033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4752391570278056286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2775340649334544018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9777385f4512dff4484d1d2107472df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: 58221ecd8d9457545bfcded22a25128a, type: 2}
+  BGMClip: {fileID: 8300000, guid: 88a2bb779b0182a49bdb9320f4b3dae0, type: 3}
+  jumpClip: {fileID: 8300000, guid: 48b1868e54879e9439daea9f135b4b15, type: 3}
+  fallToGroundClip: {fileID: 8300000, guid: af3034dc5e7787c41b88843b8122e679, type: 3}
+  attackClip: {fileID: 8300000, guid: 40284c63bae1e0b40ad1389f54fbcbcc, type: 3}
+  hurtEnemyClip: {fileID: 8300000, guid: 38e496664a925cc41b81462727391ea2, type: 3}
+  hurtClip: {fileID: 8300000, guid: 1c69d59230f37d2498a5a391ce6efbf3, type: 3}
+  turnOnLightClip: {fileID: 8300000, guid: 6abb94a923544ad43943845cd0998049, type: 3}
+  turnOffLightClip: {fileID: 8300000, guid: 04e3739755e515a478a7de4d4f496c48, type: 3}
+  runClip:
+  - {fileID: 8300000, guid: b37a5e4d96df02345be2b109be6105d1, type: 3}
+  - {fileID: 8300000, guid: 0eb18aaa5a26bc5478b4de0b3aad1c2b, type: 3}
+  - {fileID: 8300000, guid: 55b39c9cbb64c964c9789f60bacb26f3, type: 3}
+  SelectClip: {fileID: 0}
+  ClickClip: {fileID: 0}
