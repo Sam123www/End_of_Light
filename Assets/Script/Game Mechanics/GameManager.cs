@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour
         }
         else if (isNewLevel)
         {
-            instance = this;
-            checkPointId = 0;
+            instance.checkPointId = 0;
+            instance.playerPosition = playerPosition;
+            Destroy(gameObject);
         }
         else
         {
