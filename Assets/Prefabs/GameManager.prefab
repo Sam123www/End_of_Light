@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIPrefab: {fileID: 4251845738533536917, guid: 7b9b140c023d5d244bc34561412b1f6a, type: 3}
-  AudioManagerPrefab: {fileID: 2775340649334544018, guid: 884ca7c66c5c15c408ad9e3393e00ffa, type: 3}
+  checkPointId: 0
   player_fullHP: 25
   player_fullLight: 50
+  playerPosition: {x: 0, y: 0}
