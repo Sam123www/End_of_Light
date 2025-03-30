@@ -38,6 +38,7 @@ public class playerController : MonoBehaviour
     public bool isFalling, isAttack, canChangeAnim = true;
     [Header("Attack")]
     public float attack_cd, attackTime, attackTimer;
+
     void Awake()
     {
         if(instance == null)
