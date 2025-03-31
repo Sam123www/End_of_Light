@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] runClip;
     [Header("UI")]
     AudioSource UISource;
-    public AudioClip SelectClip, ClickClip;
+    public AudioClip selectClip, clickClip, enterGameClip;
     private void Awake()
     {
         if (instance == null)
@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
         playerMoveSource = gameObject.AddComponent<AudioSource>();
         playerAttackSource = gameObject.AddComponent<AudioSource>();
         playerLightSource = gameObject.AddComponent<AudioSource>();
+        UISource = gameObject.AddComponent<AudioSource>();
     }
     private void Start()
     {
@@ -100,5 +101,20 @@ public class AudioManager : MonoBehaviour
     {
         instance.prioritySource.clip = instance.hurtClip;
         instance.prioritySource.Play();
+    }
+    public static void PlayButtonSelect()
+    {
+        instance.UISource.clip = instance.selectClip;
+        instance.UISource.Play();
+    }
+    public static void PlayButtonClick()
+    {
+        instance.UISource.clip = instance.clickClip;
+        instance.UISource.Play();
+    }
+    public static void PlayEnterGame()
+    {
+        instance.UISource.clip = instance.enterGameClip;
+        instance.UISource.Play();
     }
 }

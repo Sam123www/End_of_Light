@@ -44,18 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9777385f4512dff4484d1d2107472df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMixer: {fileID: 24100000, guid: 58221ecd8d9457545bfcded22a25128a, type: 2}
   BGMClip: {fileID: 8300000, guid: 88a2bb779b0182a49bdb9320f4b3dae0, type: 3}
   jumpClip: {fileID: 8300000, guid: 48b1868e54879e9439daea9f135b4b15, type: 3}
   fallToGroundClip: {fileID: 8300000, guid: af3034dc5e7787c41b88843b8122e679, type: 3}
   attackClip: {fileID: 8300000, guid: 40284c63bae1e0b40ad1389f54fbcbcc, type: 3}
-  hurtEnemyClip: {fileID: 8300000, guid: 38e496664a925cc41b81462727391ea2, type: 3}
-  hurtClip: {fileID: 8300000, guid: 1c69d59230f37d2498a5a391ce6efbf3, type: 3}
+  hurtEnemyClip: {fileID: 8300000, guid: 1c69d59230f37d2498a5a391ce6efbf3, type: 3}
+  hurtClip: {fileID: 8300000, guid: 38e496664a925cc41b81462727391ea2, type: 3}
   turnOnLightClip: {fileID: 8300000, guid: 6abb94a923544ad43943845cd0998049, type: 3}
-  turnOffLightClip: {fileID: 8300000, guid: 04e3739755e515a478a7de4d4f496c48, type: 3}
+  turnOffLightClip: {fileID: 8300000, guid: 692b10fce92d08145961a101bb886324, type: 3}
   runClip:
   - {fileID: 8300000, guid: b37a5e4d96df02345be2b109be6105d1, type: 3}
   - {fileID: 8300000, guid: 0eb18aaa5a26bc5478b4de0b3aad1c2b, type: 3}
   - {fileID: 8300000, guid: 55b39c9cbb64c964c9789f60bacb26f3, type: 3}
-  SelectClip: {fileID: 0}
-  ClickClip: {fileID: 0}
+  selectClip: {fileID: 8300000, guid: 79121b48875cff742b1984a99a910bff, type: 3}
+  clickClip: {fileID: 8300000, guid: 91f76a3536910a7479a219bec461b4b1, type: 3}
+  enterGameClip: {fileID: 8300000, guid: 730c4e65fa1b95a4ead5f2a729b39527, type: 3}

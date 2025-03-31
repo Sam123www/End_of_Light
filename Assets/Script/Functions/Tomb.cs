@@ -26,7 +26,6 @@ public class Tomb : MonoBehaviour
             Instantiate(skeleton, transform.position + Vector3.up * offset, Quaternion.identity).transform.SetParent(transform);
         }
     }
-    
     public void Enable()
     {
         if (isEnable) return;

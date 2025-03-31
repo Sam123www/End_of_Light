@@ -51,7 +51,6 @@ public class playerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         jumpTimes = jumpMaxTimes;
-        transform.position = GameManager.instance.playerPosition;
     }
     void Update()
     {

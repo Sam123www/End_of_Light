@@ -1,11 +1,16 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
 public class Elevator : MonoBehaviour
 {
-    public float speed;
+    AudioSource audioSource;
+    public CinemachineImpulseDefinition cid;
+    public AudioClip duringClip, endClip;
+    public float speed, shakeForce, shakeTime;
     public Transform upPoint, downPoint;
     bool toUp = true;
     public GameObject lightObj;
@@ -13,6 +18,7 @@ public class Elevator : MonoBehaviour
     public void Enable()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         if (toUp)
         {
             rb.velocity = Vector2.up * speed;
@@ -21,6 +27,7 @@ public class Elevator : MonoBehaviour
         {
             rb.velocity = Vector2.down * speed;
         }
+        StartCoroutine(Shaking());
     }
     private void FixedUpdate()
     {
@@ -36,5 +43,19 @@ public class Elevator : MonoBehaviour
             rb.velocity = Vector2.zero;
             lightObj.SendMessage("Disable");
         }
+    }
+    IEnumerator Shaking()
+    {
+        audioSource.clip = duringClip;
+        audioSource.loop = true;
+        audioSource.Play();
+        while (Mathf.Abs(rb.velocity.y) > 0.1f)
+        {
+            cid.CreateEvent(transform.position, new Vector3(shakeForce, shakeForce, 0));
+            yield return new WaitForSeconds(shakeTime);
+        }
+        audioSource.loop = false;
+        audioSource.clip = endClip;
+        audioSource.Play();
     }
 }

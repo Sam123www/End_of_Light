@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LightDoor : MonoBehaviour
 {
+    AudioSource audioSource;
+    public AudioClip enableClip, duringClip;
     Animator anim;
     CinemachineImpulseSource cis;
     public CinemachineImpulseDefinition cid;
@@ -14,6 +16,7 @@ public class LightDoor : MonoBehaviour
     {
         if (isEnable) return;
         isEnable = true;
+        audioSource = GetComponent<AudioSource>();
         cis = GetComponent<CinemachineImpulseSource>();
         cis.GenerateImpulse(firstShakeForce);
         StartCoroutine(Shaking());
@@ -22,11 +25,17 @@ public class LightDoor : MonoBehaviour
     }
     IEnumerator Shaking()
     {
+        audioSource.clip = enableClip;
+        audioSource.Play();
         yield return new WaitForSeconds(waitTime);
+        audioSource.clip = duringClip;
+        audioSource.loop = true;
+        audioSource.Play();
         for(int i=0; i<shakeNum; i++)
         {
             cid.CreateEvent(transform.position, new Vector3(shakeForce, shakeForce, 0));
             yield return new WaitForSeconds(shakeTime);
         }
+        audioSource.Stop();
     }
 }

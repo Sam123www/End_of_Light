@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogSystem : MonoBehaviour
 {
+    public SceneAsset nextScene;
     Image img;
     public Sprite backImg1, backImg2;
     public TextMeshProUGUI textLabel, roleNameLabel, narrationLabel;
@@ -25,10 +27,13 @@ public class DialogSystem : MonoBehaviour
     {
         if (Input.GetButtonDown("Submit") && index >= textList.Count)
         {
+            AudioManager.PlayButtonClick();
+            GameManager.instance.Loading(nextScene.name);
             gameObject.SetActive(false);
         }
         else if (Input.GetButtonDown("Submit"))
         {
+            AudioManager.PlayButtonClick();
             SetText();
         }
     }

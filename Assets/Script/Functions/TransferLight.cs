@@ -7,6 +7,8 @@ using UnityEngine.UIElements.Experimental;
 
 public class TransferLight : MonoBehaviour
 {
+    AudioSource audioSource;
+    public AudioClip enableClip;
     public GameObject[] PriorityObj, LowPriorityObj;
     Animator anim;
     Collider2D[] lightcol;
@@ -16,6 +18,7 @@ public class TransferLight : MonoBehaviour
     public LayerMask lightLayer, groundLayer, trapLayer;
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
     }
     private void OnDrawGizmos()
@@ -57,6 +60,8 @@ public class TransferLight : MonoBehaviour
     }
     IEnumerator toEnable()
     {
+        audioSource.clip = enableClip;
+        audioSource.Play();
         anim.Play("enable");
         if (PriorityObj.Length > 0)
         {

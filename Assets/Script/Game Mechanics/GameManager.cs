@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public GameObject UIPrefab;
     public int checkPointId;
     public float player_fullHP, player_fullLight;
-    public bool isNewLevel;
     public Vector3 playerPosition;
     void Awake()
     {
@@ -22,12 +21,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             UIPrefab = Instantiate(UIPrefab);
             DontDestroyOnLoad(UIPrefab);
-        }
-        else if (isNewLevel)
-        {
-            instance.checkPointId = 0;
-            instance.playerPosition = playerPosition;
-            Destroy(gameObject);
         }
         else
         {
