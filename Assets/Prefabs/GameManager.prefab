@@ -48,4 +48,4 @@ MonoBehaviour:
   checkPointId: 0
   player_fullHP: 25
   player_fullLight: 50
-  playerPosition: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0, z: 0}

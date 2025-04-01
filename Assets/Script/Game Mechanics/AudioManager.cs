@@ -8,8 +8,10 @@ using UnityEngine.UIElements.Experimental;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    [Header("Priority")]
-    AudioSource prioritySource;
+    public AudioMixer audioMixer;
+    public AudioMixerGroup SFXGroup, BGMGroup;
+    //[Header("Priority")]
+    //AudioSource prioritySource;
     [Header("BGM")]
     AudioSource BGMSource;
     public AudioClip BGMClip;
@@ -26,12 +28,18 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
-        prioritySource = gameObject.AddComponent<AudioSource>();
+        //prioritySource = gameObject.AddComponent<AudioSource>();
         BGMSource = gameObject.AddComponent<AudioSource>();
         playerMoveSource = gameObject.AddComponent<AudioSource>();
         playerAttackSource = gameObject.AddComponent<AudioSource>();
         playerLightSource = gameObject.AddComponent<AudioSource>();
         UISource = gameObject.AddComponent<AudioSource>();
+
+        BGMSource.outputAudioMixerGroup = BGMGroup;
+        playerMoveSource.outputAudioMixerGroup = SFXGroup;
+        playerAttackSource.outputAudioMixerGroup = SFXGroup;
+        playerLightSource.outputAudioMixerGroup = SFXGroup;
+        UISource.outputAudioMixerGroup = SFXGroup;
     }
     private void Start()
     {
@@ -40,7 +48,7 @@ public class AudioManager : MonoBehaviour
             PlayBGM();
         }
     }
-    public static void MuteAll()
+    /*public static void MuteAll()
     {
         AudioSource[] allSource = instance.GetComponents<AudioSource>();
         foreach (AudioSource source in allSource)
@@ -48,7 +56,7 @@ public class AudioManager : MonoBehaviour
             source.mute = true;
         }
         instance.prioritySource.mute = false;
-    }
+    }*/
     public static void PlayBGM()
     {
         instance.BGMSource.clip = instance.BGMClip;
@@ -97,11 +105,11 @@ public class AudioManager : MonoBehaviour
         instance.playerLightSource.clip = instance.turnOffLightClip;
         instance.playerLightSource.Play();
     }
-    public static void PlayDieAudio()
+    /*public static void PlayDieAudio()
     {
         instance.prioritySource.clip = instance.hurtClip;
         instance.prioritySource.Play();
-    }
+    }*/
     public static void PlayButtonSelect()
     {
         instance.UISource.clip = instance.selectClip;

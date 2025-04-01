@@ -10,6 +10,7 @@ public class DialogSystem : MonoBehaviour
 {
     public SceneAsset nextScene;
     Image img;
+    public Animator[] dialogAnimator;
     public Sprite backImg1, backImg2;
     public TextMeshProUGUI textLabel, roleNameLabel, narrationLabel;
     public TextAsset textFile;
@@ -19,6 +20,7 @@ public class DialogSystem : MonoBehaviour
     {
         textLabel.text = "";
         roleNameLabel.text = "";
+        narrationLabel.text = "";
         textList.Clear();
         img = GetComponent<Image>();
         GetText();
@@ -39,13 +41,23 @@ public class DialogSystem : MonoBehaviour
     }
     void SetText()
     {
-        if (textList[index][0] == 'N')
+        Debug.Log(textList[index].Length);
+        if (textList[index].Length == 2 && textList[index][0] == 'E')
+        {
+            int id = textList[index][1]-'0';
+            index++;
+            Debug.Log(id + textList[index]);
+            dialogAnimator[id].Play(textList[index]);
+            index++;
+        }
+        if (textList[index] == "N")
         {
             img.sprite = backImg1;
             roleNameLabel.text = "";
             index++;
             textLabel.text = "";
             narrationLabel.text = textList[index];
+            index++;
         }
         else
         {
@@ -54,8 +66,8 @@ public class DialogSystem : MonoBehaviour
             index++;
             narrationLabel.text = "";
             textLabel.text = textList[index];
+            index++;
         }
-        index++;
     }
     void GetText()
     {
@@ -63,7 +75,11 @@ public class DialogSystem : MonoBehaviour
         var lineData = textFile.text.Split('\n');
         foreach (var line in lineData)
         {
-            textList.Add(line);
+            var tmp = line.Trim();
+            if (tmp.Length > 0)
+            {
+                textList.Add(tmp);
+            }
         }
         SetText();
     }

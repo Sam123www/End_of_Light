@@ -67,8 +67,8 @@ public class playerAttack : MonoBehaviour
     IEnumerator Dying()
     {
         gameObject.layer = LayerMask.NameToLayer("None");
-        AudioManager.MuteAll();
-        AudioManager.PlayDieAudio();
+        //AudioManager.MuteAll();
+        //AudioManager.PlayDieAudio();
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(0.5f);
         GameManager.instance.SendMessage("Loading", SceneManager.GetActiveScene().name);
