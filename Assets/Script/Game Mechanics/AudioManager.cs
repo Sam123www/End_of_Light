@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UIElements.Experimental;
 
 public class AudioManager : MonoBehaviour
 {

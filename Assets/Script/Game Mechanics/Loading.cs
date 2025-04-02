@@ -1,11 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class Loading : MonoBehaviour
 {

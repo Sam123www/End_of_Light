@@ -1,15 +1,7 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.Diagnostics;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class playerAttack : MonoBehaviour
 {
