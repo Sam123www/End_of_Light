@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9777385f4512dff4484d1d2107472df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 58221ecd8d9457545bfcded22a25128a, type: 2}
+  SFXGroup: {fileID: -8245312691652352227, guid: 58221ecd8d9457545bfcded22a25128a, type: 2}
+  BGMGroup: {fileID: 5716013590494719969, guid: 58221ecd8d9457545bfcded22a25128a, type: 2}
   BGMClip: {fileID: 8300000, guid: 88a2bb779b0182a49bdb9320f4b3dae0, type: 3}
   jumpClip: {fileID: 8300000, guid: 48b1868e54879e9439daea9f135b4b15, type: 3}
   fallToGroundClip: {fileID: 8300000, guid: af3034dc5e7787c41b88843b8122e679, type: 3}

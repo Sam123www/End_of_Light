@@ -19,18 +19,9 @@ public class Door : MonoBehaviour
                 {
                     item.gameObject.GetComponent<SpriteRenderer>().sprite = open;
                 }
-                //StartCoroutine(Transmit());
-                GameManager.instance.Loading(nextScene.name);
                 Time.timeScale = 0;
+                GameManager.instance.Loading(nextScene.name);
             }
         } 
-    }
-
-    IEnumerator Transmit()
-    {
-        player_UI.playerUI.Transmit();
-        yield return new WaitForSecondsRealtime(0.5f);
-        Time.timeScale = 1;
-        SceneManager.LoadScene(nextScene.name);
     }
 }

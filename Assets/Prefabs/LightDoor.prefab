@@ -947,6 +947,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6409160423635325337, guid: e7ddb92e57976e0409a2bf60f8ffea32, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6409160423635325337, guid: e7ddb92e57976e0409a2bf60f8ffea32, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[3]
+      value: -1499093697
+      objectReference: {fileID: 0}
+    - target: {fileID: 6409160423635325337, guid: e7ddb92e57976e0409a2bf60f8ffea32, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: 1147715629
+      objectReference: {fileID: 0}
     - target: {fileID: 8436518080368532446, guid: e7ddb92e57976e0409a2bf60f8ffea32, type: 3}
       propertyPath: m_Layer
       value: 11

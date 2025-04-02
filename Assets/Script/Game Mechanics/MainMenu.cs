@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject lightMouse, Credits;
+    public GameObject lightMouse, Credits, OptionsPanel;
     public bool lightEnable;
     public SceneAsset playScene, OptionsScene, aboutAsScene;
     private void Update()
@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
         if (lightEnable)
         {
             AudioManager.PlayButtonClick();
-            SceneManager.LoadScene(OptionsScene.name);
+            OptionsPanel.SetActive(true);
         }
     }
     public void CreditsBotton()
