@@ -9,13 +9,13 @@ public class Options_UI : MonoBehaviour
     public Slider audioSlider, BGMSlider, SFXSlider;
     private void Start()
     {
-        if (fullScreenToggle.isOn)
+        if (Screen.fullScreen)
         {
-            Screen.fullScreen = true;
+            fullScreenToggle.isOn = true;
         }
         else
         {
-            Screen.fullScreen = false;
+            fullScreenToggle.isOn = true;
         }
     }
     private void Update()

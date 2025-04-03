@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DialogSystem : MonoBehaviour
 {
-    public SceneAsset nextScene;
+    public string nextScene;
     Image img;
     public Animator[] dialogAnimator;
     public Sprite backImg1, backImg2;
@@ -28,7 +28,7 @@ public class DialogSystem : MonoBehaviour
         if (Input.GetButtonDown("Submit") && index >= textList.Count)
         {
             AudioManager.PlayButtonClick();
-            GameManager.instance.Loading(nextScene.name);
+            GameManager.instance.Loading(nextScene);
             gameObject.SetActive(false);
         }
         else if (Input.GetButtonDown("Submit"))

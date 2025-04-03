@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
-    public SceneAsset nextScene;
+    public string nextScene;
     public void Enable()
     {
-        GameManager.instance.Loading(nextScene.name);
+        GameManager.instance.Loading(nextScene);
     }
 }

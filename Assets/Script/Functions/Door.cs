@@ -8,7 +8,7 @@ public class Door : MonoBehaviour
 {
     public GameObject[] door;
     public Sprite open;
-    public SceneAsset nextScene;
+    public string nextScene;
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
                     item.gameObject.GetComponent<SpriteRenderer>().sprite = open;
                 }
                 Time.timeScale = 0;
-                GameManager.instance.Loading(nextScene.name);
+                GameManager.instance.Loading(nextScene);
             }
         } 
     }

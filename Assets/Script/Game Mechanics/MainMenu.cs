@@ -3,7 +3,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     public GameObject lightMouse, Credits, OptionsPanel;
-    public SceneAsset playScene;
+    public string playScene;
     private void Update()
     {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     public void PlayBotton()
     {
         AudioManager.PlayEnterGame();
-        GameManager.instance.Loading(playScene.name);
+        GameManager.instance.Loading(playScene);
     }
     public void OptionsBotton()
     {
