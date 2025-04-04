@@ -11,6 +11,10 @@ public class CheckPoint : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
+        if (GameManager.instance.firstIntoScene)
+        {
+            GameManager.instance.checkPointId = 0;
+        }
         if(GameManager.instance.checkPointId == id)
         {
             isEnable = true;

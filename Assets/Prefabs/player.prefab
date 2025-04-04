@@ -681,7 +681,7 @@ MonoBehaviour:
   isFalling: 0
   isAttack: 0
   canChangeAnim: 1
-  attack_cd: 0.4
+  attack_cd: 0.3
   attackTime: 0.2
   attackTimer: 0
 --- !u!114 &2251272233854636535
