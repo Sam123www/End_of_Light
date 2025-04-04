@@ -15,7 +15,7 @@ public class Options_UI : MonoBehaviour
         }
         else
         {
-            fullScreenToggle.isOn = true;
+            fullScreenToggle.isOn = false;
         }
     }
     private void Update()
@@ -29,7 +29,7 @@ public class Options_UI : MonoBehaviour
         AudioManager.PlayButtonClick();
         if (fullScreenToggle.isOn)
         {
-            Screen.fullScreen = true;
+            Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
         }
         else
         {

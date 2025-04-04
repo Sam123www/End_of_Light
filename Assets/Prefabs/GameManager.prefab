@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIPrefab: {fileID: 4251845738533536917, guid: 7b9b140c023d5d244bc34561412b1f6a, type: 3}
   checkPointId: 0
+  firstIntoScene: 0
   player_fullHP: 25
   player_fullLight: 50
   playerPosition: {x: 0, y: 0, z: 0}

@@ -30,6 +30,17 @@ public class EnemySekelton : Enemy
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(wallChecking());
     }
+    bool PlayerGroundCheck()
+    {
+        if (Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask) ||  
+            Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, oneWayGroundMask)){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     private void FixedUpdate()
     {
         switch (status)
@@ -54,7 +65,7 @@ public class EnemySekelton : Enemy
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     rb.velocity = new Vector2(-Speed, rb.velocity.y);
                 }
-                if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
+                if (playerCheck_circle && !PlayerGroundCheck())
                 {
                     sk_light.intensity = li_intensity;
                     if (playerCheck_circle.transform.position.x < transform.position.x)
@@ -74,14 +85,14 @@ public class EnemySekelton : Enemy
                 break;
             case Status.track:
                 ChangeAnimationState(anim_run);
-                if (playerCheck_circle && !Physics2D.Linecast(transform.position, playerCheck_circle.transform.position, groundMask))
+                if (playerCheck_circle && !PlayerGroundCheck())
                 {
-                    anim.speed = 2;
+                    anim.speed = 3;
                     changeDir();
                     if (isRight)
                     {
                         transform.rotation = Quaternion.Euler(0, 180, 0);
-                        rb.velocity = new Vector2(2*Speed, rb.velocity.y);
+                        rb.velocity = new Vector2(3*Speed, rb.velocity.y);
                         if(playerCheck_circle.transform.position.x < transform.position.x && !rotating)
                         {
                             rotating = true;
@@ -91,7 +102,7 @@ public class EnemySekelton : Enemy
                     else
                     {
                         transform.rotation = Quaternion.Euler(0, 0, 0);
-                        rb.velocity = new Vector2(-2*Speed, rb.velocity.y);
+                        rb.velocity = new Vector2(-3*Speed, rb.velocity.y);
                         if (playerCheck_circle.transform.position.x > transform.position.x && !rotating)
                         {
                             rotating = true;

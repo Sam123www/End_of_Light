@@ -148,6 +148,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  oneWayGroundMask:
+    serializedVersion: 2
+    m_Bits: 4096
   playerTransform: {fileID: 0}
   sk_light: {fileID: 3845862835496144244}
   li_intensity: 0.4

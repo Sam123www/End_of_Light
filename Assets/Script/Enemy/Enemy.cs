@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
     public bool playerCheck_L, playerCheck_R, wallCheck;
     public float range_radius, range_x, range_y, offset_y, hp, damage, range_wall;
     public Collider2D playerCheck_circle;
-    public LayerMask playerMask, groundMask;
+    public LayerMask playerMask, groundMask, oneWayGroundMask;
     public Transform playerTransform;
     protected Rigidbody2D rb;
     protected Animator anim;
